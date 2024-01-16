@@ -481,7 +481,93 @@ Config.Interactions = {
         z = 0.5,
         heading = 270.0
     },
-
+    		isCompatible = IsPedHumanMale,
+		objects = {"churchbench1"},
+		label = "left",
+		radius = 2.0,
+		scenarios = GenericChairAndBenchScenarios,
+		x = -1.5,
+		y = 0.0,
+		z = -0.3,
+		heading = 180.0
+	},
+	{
+		isCompatible = IsPedHumanMale,
+		objects = {"churchbench1"},
+		label = "right",
+		radius = 2.0,
+		scenarios = GenericChairAndBenchScenarios,
+		x = 0.0,
+		y = 0.0,
+		z = -0.3,
+		heading = 180.0
+	},
+	{
+		isCompatible = IsPedAdultFemale,
+		objects = {"churchbench1"},
+		label = "left",
+		radius = 2.0,
+		scenarios = GenericChairAndBenchScenarios,
+		x = -1.5,
+		y = 0.0,
+		z = -0.3,
+		heading = 180.0
+	},
+	{
+		isCompatible = IsPedAdultFemale,
+		objects = {"churchbench1"},
+		label = "right",
+		radius = 2.0,
+		scenarios = GenericChairAndBenchScenarios,
+		x = 0.0,
+		y = 0.0,
+		z = -0.3,
+		heading = 180.0
+	},
+	{
+		isCompatible = IsPedHumanMale,
+		objects = {"churchbench2"},
+		label = "left",
+		radius = 2.0,
+		scenarios = GenericChairAndBenchScenarios,
+		x = 0.0,
+		y = 0.0,
+		z = -0.3,
+		heading = 180.0
+	},
+	{
+		isCompatible = IsPedHumanMale,
+		objects = {"churchbench2"},
+		label = "right",
+		radius = 2.0,
+		scenarios = GenericChairAndBenchScenarios,
+		x = 1.5,
+		y = 0.0,
+		z = -0.3,
+		heading = 180.0
+	},
+	{
+		isCompatible = IsPedAdultFemale,
+		objects = {"churchbench2"},
+		label = "left",
+		radius = 2.0,
+		scenarios = GenericChairAndBenchScenarios,
+		x = 0.0,
+		y = 0.0,
+		z = -0.3,
+		heading = 180.0
+	},
+	{
+		isCompatible = IsPedAdultFemale,
+		objects = {"churchbench2"},
+		label = "right",
+		radius = 2.0,
+		scenarios = GenericChairAndBenchScenarios,
+		x = 1.5,
+		y = 0.0,
+		z = -0.3,
+		heading = 180.0
+	},
     -- -- Valentine bath
     -- {
     -- 	radius = 2.0,
