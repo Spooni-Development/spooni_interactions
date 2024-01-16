@@ -481,7 +481,10 @@ Config.Interactions = {
         z = 0.5,
         heading = 270.0
     },
-    		isCompatible = IsPedHumanMale,
+    ---- Custom
+    -- Valentine Church
+    {
+        isCompatible = IsPedHumanMale,
 		objects = {"churchbench1"},
 		label = "left",
 		radius = 2.0,
@@ -568,109 +571,110 @@ Config.Interactions = {
 		z = -0.3,
 		heading = 180.0
 	},
-    -- -- Valentine bath
-    -- {
-    -- 	radius = 2.0,
-    -- 	animations = BathingAnimations,
-    -- 	x = -317.01651,
-    -- 	y = 761.86,
-    -- 	z = 117.45099,
-    -- 	heading = 100.278,
-    -- 	effect = "clean"
-    -- },
-    -- -- Saint Denis bath
-    -- {
-    -- 	radius = 2.0,
-    -- 	animations = BathingAnimations,
-    -- 	x = 2629.4099,
-    -- 	y = -1223.7757,
-    -- 	z = 59.6699,
-    -- 	heading = 2.896,
-    -- 	effect = "clean"
-    -- },
-    -- -- Strawberry bath
-    -- {
-    -- 	radius = 2.0,
-    -- 	animations = BathingAnimations,
-    -- 	x = -1812.46838,
-    -- 	y = -373.23529,
-    -- 	z = 166.64999,
-    -- 	heading = 92.105,
-    -- 	effect = "clean"
-    -- },
-    -- -- Annesburg bath
-    -- {
-    -- 	radius = 2.0,
-    -- 	animations = BathingAnimations,
-    -- 	x = 2952.804199,
-    -- 	y = 1335.031494,
-    -- 	z = 44.496986,
-    -- 	heading = 154.996,
-    -- 	effect = "clean"
-    -- },
-    -- -- Bronte mansion bath
-    -- {
-    -- 	radius = 2.0,
-    -- 	animations = BathingAnimations,
-    -- 	x = 2365.649,
-    -- 	y = -1211.780,
-    -- 	z = 51.888,
-    -- 	heading = 3.0,
-    -- 	effect = "clean"
-    -- },
-    -- -- Rhodes bath
-    -- {
-    -- 	radius = 2.0,
-    -- 	animations = BathingAnimations,
-    -- 	x = 1336.350,
-    -- 	y = -1377.972,
-    -- 	z = 84.345,
-    -- 	heading = -96.693,
-    -- 	effect = "clean"
-    -- },
-    -- -- Tumbleweed bath
-    -- {
-    -- 	radius = 2.0,
-    -- 	animations = BathingAnimations,
-    -- 	x = -5513.196,
-    -- 	y = -2972.139,
-    -- 	z = -0.75,
-    -- 	heading = 108.131,
-    -- 	effect = "clean"
-    -- },
-    -- -- Van Horn bath
-    -- {
-    -- 	radius = 2.0,
-    -- 	animations = BathingAnimations,
-    -- 	x = 2987.698,
-    -- 	y = 573.760,
-    -- 	z = 47.920,
-    -- 	heading = 171.942,
-    -- 	effect = "clean"
-    -- },
-    -- -- Blackwater bath
-    -- {
-    -- 	radius = 2.0,
-    -- 	animations = BathingAnimations,
-    -- 	x = -823.362,
-    -- 	y = -1318.832,
-    -- 	z = 43.679,
-    -- 	heading = 92.793,
-    -- 	effect = "clean"
-    -- },
-    -- {
-    -- 	isCompatible = IsPedHumanMale,
-    -- 	objects = {
-    -- 		"p_bath03x"
-    -- 	},
-    -- 	radius = 2.0,
-    -- 	animations = BathingAnimations,
-    -- 	x = -0.5,
-    -- 	y = 0.0,
-    -- 	z = 0.65,
-    -- 	heading = 270.0,
-    -- 	effect = "clean"
-    -- }
+    ---- Bath
+    -- Valentine bath
+    {
+    	radius = 2.0,
+    	animations = BathingAnimations,
+    	x = -317.01651,
+    	y = 761.86,
+    	z = 117.45099,
+    	heading = 100.278,
+    	effect = "clean"
+    },
+    -- Saint Denis bath
+    {
+    	radius = 2.0,
+    	animations = BathingAnimations,
+    	x = 2629.4099,
+    	y = -1223.7757,
+    	z = 59.6699,
+    	heading = 2.896,
+    	effect = "clean"
+    },
+    -- Strawberry bath
+    {
+    	radius = 2.0,
+    	animations = BathingAnimations,
+    	x = -1812.46838,
+    	y = -373.23529,
+    	z = 166.64999,
+    	heading = 92.105,
+    	effect = "clean"
+    },
+    -- Annesburg bath
+    {
+    	radius = 2.0,
+    	animations = BathingAnimations,
+    	x = 2952.804199,
+    	y = 1335.031494,
+    	z = 44.496986,
+    	heading = 154.996,
+    	effect = "clean"
+    },
+    -- Bronte mansion bath
+    {
+    	radius = 2.0,
+    	animations = BathingAnimations,
+    	x = 2365.649,
+    	y = -1211.780,
+    	z = 51.888,
+    	heading = 3.0,
+    	effect = "clean"
+    },
+    -- Rhodes bath
+    {
+    	radius = 2.0,
+    	animations = BathingAnimations,
+    	x = 1336.350,
+    	y = -1377.972,
+    	z = 84.345,
+    	heading = -96.693,
+    	effect = "clean"
+    },
+    -- Tumbleweed bath
+    {
+    	radius = 2.0,
+    	animations = BathingAnimations,
+    	x = -5513.196,
+    	y = -2972.139,
+    	z = -0.75,
+    	heading = 108.131,
+    	effect = "clean"
+    },
+    -- Van Horn bath
+    {
+    	radius = 2.0,
+    	animations = BathingAnimations,
+    	x = 2987.698,
+    	y = 573.760,
+    	z = 47.920,
+    	heading = 171.942,
+    	effect = "clean"
+    },
+    -- Blackwater bath
+    {
+    	radius = 2.0,
+    	animations = BathingAnimations,
+    	x = -823.362,
+    	y = -1318.832,
+    	z = 43.679,
+    	heading = 92.793,
+    	effect = "clean"
+    },
+    {
+    	isCompatible = IsPedHumanMale,
+    	objects = {
+    		"p_bath03x"
+    	},
+    	radius = 2.0,
+    	animations = BathingAnimations,
+    	x = -0.5,
+    	y = 0.0,
+    	z = 0.65,
+    	heading = 270.0,
+    	effect = "clean"
+    },
     {
         isCompatible = IsPedHuman,
         objects = {
