@@ -1,4 +1,6 @@
-# 1. Installation
+# :chair: Interactions
+
+## 1. Installation
 spooni_interactions works Standalone. 
 
 To install spooni_interactions:
@@ -13,10 +15,10 @@ To install spooni_interactions:
 
 If you have any problems, you can always open a ticket in the Spooni Discord.
 
-# 2. Usage
+## 2. Usage
 Go to a prop in the list and interact with the prompt to open the menu, where you can then select scenarios.
 
-# 3. Credits
+## 3. Credits
 
 Big thanks go to [kibook](https://github.com/kibook) the creator of the main script, since the script is already 3 years old (as of 2024) we wanted to give it a little overhaul.
 
