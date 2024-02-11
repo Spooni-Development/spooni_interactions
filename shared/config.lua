@@ -4,7 +4,7 @@ Config.Locale = "en" -- de, en, fr
 
 Config.Key = 0x8AAA0AD4 -- LALT
 
-Config.Marker = { R = 255, G = 255, B = 255,A = 100, }
+Config.Marker = {R = 255, G = 255, B = 255, A = 100}
 
 Config.Effects = {
     ["clean"] = function()
@@ -77,68 +77,6 @@ Config.Interactions = {
         z = 0.5,
         heading = 180.0
     },
-    -- {
-    -- 	isCompatible = IsPedAdult,
-    -- 	objects = GenericChairs,
-    -- 	radius = 1.5,
-    -- 	scenarios = {
-    -- 		{name = "PROP_HUMAN_SEAT_CHAIR_DRINKING"}
-    -- 	},
-    -- 	x = 0.0,
-    -- 	y = 0.05,
-    -- 	z = -0.1,
-    -- 	heading = 180.0
-    -- },
-    -- {
-    -- 	isCompatible = IsPedAdult,
-    -- 	objects = GenericBenches,
-    -- 	radius = 1.5,
-    -- 	scenarios = {
-    -- 		{name = "PROP_HUMAN_SEAT_CHAIR_DRINKING"}
-    -- 	},
-    -- 	label = "left",
-    -- 	x = 0.4,
-    -- 	y = -0.05,
-    -- 	z = -0.1,
-    -- 	heading = 180.0
-    -- },
-    -- {
-    -- 	isCompatible = IsPedAdult,
-    -- 	objects = GenericBenches,
-    -- 	radius = 1.5,
-    -- 	scenarios = {
-    -- 		{name = "PROP_HUMAN_SEAT_CHAIR_DRINKING"}
-    -- 	},
-    -- 	label = "right",
-    -- 	x = -0.4,
-    -- 	y = -0.05,
-    -- 	z = -0.1,
-    -- 	heading = 180.0
-    -- },
-    -- {
-    -- 	isCompatible = IsPedHumanMaleMale,
-    -- 	objects = GenericChairs,
-    -- 	radius = 1.5,
-    -- 	scenarios = {
-    -- 		{name = "PROP_HUMAN_SEAT_BENCH_HARMONICA"}
-    -- 	},
-    -- 	x = 0.0,
-    -- 	y = -0.3,
-    -- 	z = 0.5,
-    -- 	heading = 180.0
-    -- },
-    -- {
-    -- 	isCompatible = IsPedAdultFemale,
-    -- 	objects = GenericChairs,
-    -- 	radius = 1.5,
-    -- 	scenarios = {
-    -- 		{name = "PROP_HUMAN_SEAT_CHAIR_FAN"}
-    -- 	},
-    -- 	x = 0.0,
-    -- 	y = 0.0,
-    -- 	z = 0.5,
-    -- 	heading = 240.0
-    -- },
     {
         isCompatible = IsPedAdult,
         objects = {"p_chairrusticsav01x"},
@@ -482,198 +420,242 @@ Config.Interactions = {
         heading = 270.0
     },
     ---- Custom
+    {
+        isCompatible = IsPedHumanFemale,
+        objects = {"p_shoeshinestand01x"},
+        label = "right",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.45,
+        y = 0.25,
+        z = 1.2,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanFemale,
+        objects = {"p_shoeshinestand01x"},
+        label = "left",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.45,
+        y = 0.25,
+        z = 1.2,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {"p_shoeshinestand01x"},
+        label = "right",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.45,
+        y = 0.25,
+        z = 1.2,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {"p_shoeshinestand01x"},
+        label = "left",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.45,
+        y = 0.25,
+        z = 1.2,
+        heading = 180.0
+    },
     -- Valentine Church
     {
         isCompatible = IsPedHumanMale,
-		objects = {"churchbench1"},
-		label = "left",
-		radius = 2.0,
-		scenarios = GenericChairAndBenchScenarios,
-		x = -1.5,
-		y = 0.0,
-		z = -0.3,
-		heading = 180.0
-	},
-	{
-		isCompatible = IsPedHumanMale,
-		objects = {"churchbench1"},
-		label = "right",
-		radius = 2.0,
-		scenarios = GenericChairAndBenchScenarios,
-		x = 0.0,
-		y = 0.0,
-		z = -0.3,
-		heading = 180.0
-	},
-	{
-		isCompatible = IsPedAdultFemale,
-		objects = {"churchbench1"},
-		label = "left",
-		radius = 2.0,
-		scenarios = GenericChairAndBenchScenarios,
-		x = -1.5,
-		y = 0.0,
-		z = -0.3,
-		heading = 180.0
-	},
-	{
-		isCompatible = IsPedAdultFemale,
-		objects = {"churchbench1"},
-		label = "right",
-		radius = 2.0,
-		scenarios = GenericChairAndBenchScenarios,
-		x = 0.0,
-		y = 0.0,
-		z = -0.3,
-		heading = 180.0
-	},
-	{
-		isCompatible = IsPedHumanMale,
-		objects = {"churchbench2"},
-		label = "left",
-		radius = 2.0,
-		scenarios = GenericChairAndBenchScenarios,
-		x = 0.0,
-		y = 0.0,
-		z = -0.3,
-		heading = 180.0
-	},
-	{
-		isCompatible = IsPedHumanMale,
-		objects = {"churchbench2"},
-		label = "right",
-		radius = 2.0,
-		scenarios = GenericChairAndBenchScenarios,
-		x = 1.5,
-		y = 0.0,
-		z = -0.3,
-		heading = 180.0
-	},
-	{
-		isCompatible = IsPedAdultFemale,
-		objects = {"churchbench2"},
-		label = "left",
-		radius = 2.0,
-		scenarios = GenericChairAndBenchScenarios,
-		x = 0.0,
-		y = 0.0,
-		z = -0.3,
-		heading = 180.0
-	},
-	{
-		isCompatible = IsPedAdultFemale,
-		objects = {"churchbench2"},
-		label = "right",
-		radius = 2.0,
-		scenarios = GenericChairAndBenchScenarios,
-		x = 1.5,
-		y = 0.0,
-		z = -0.3,
-		heading = 180.0
-	},
+        objects = {"churchbench1"},
+        label = "left",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -1.5,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {"churchbench1"},
+        label = "right",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {"churchbench1"},
+        label = "left",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -1.5,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {"churchbench1"},
+        label = "right",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {"churchbench2"},
+        label = "left",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {"churchbench2"},
+        label = "right",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 1.5,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {"churchbench2"},
+        label = "left",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {"churchbench2"},
+        label = "right",
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 1.5,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
     ---- Bath
     -- Valentine bath
     {
-    	radius = 2.0,
-    	animations = BathingAnimations,
-    	x = -317.01651,
-    	y = 761.86,
-    	z = 117.45099,
-    	heading = 100.278,
-    	effect = "clean"
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = -317.01651,
+        y = 761.86,
+        z = 117.45099,
+        heading = 100.278,
+        effect = "clean"
     },
     -- Saint Denis bath
     {
-    	radius = 2.0,
-    	animations = BathingAnimations,
-    	x = 2629.4099,
-    	y = -1223.7757,
-    	z = 59.6699,
-    	heading = 2.896,
-    	effect = "clean"
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = 2629.4099,
+        y = -1223.7757,
+        z = 59.6699,
+        heading = 2.896,
+        effect = "clean"
     },
     -- Strawberry bath
     {
-    	radius = 2.0,
-    	animations = BathingAnimations,
-    	x = -1812.46838,
-    	y = -373.23529,
-    	z = 166.64999,
-    	heading = 92.105,
-    	effect = "clean"
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = -1812.46838,
+        y = -373.23529,
+        z = 166.64999,
+        heading = 92.105,
+        effect = "clean"
     },
     -- Annesburg bath
     {
-    	radius = 2.0,
-    	animations = BathingAnimations,
-    	x = 2952.804199,
-    	y = 1335.031494,
-    	z = 44.496986,
-    	heading = 154.996,
-    	effect = "clean"
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = 2952.804199,
+        y = 1335.031494,
+        z = 44.496986,
+        heading = 154.996,
+        effect = "clean"
     },
     -- Bronte mansion bath
     {
-    	radius = 2.0,
-    	animations = BathingAnimations,
-    	x = 2365.649,
-    	y = -1211.780,
-    	z = 51.888,
-    	heading = 3.0,
-    	effect = "clean"
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = 2365.649,
+        y = -1211.780,
+        z = 51.888,
+        heading = 3.0,
+        effect = "clean"
     },
     -- Rhodes bath
     {
-    	radius = 2.0,
-    	animations = BathingAnimations,
-    	x = 1336.350,
-    	y = -1377.972,
-    	z = 84.345,
-    	heading = -96.693,
-    	effect = "clean"
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = 1336.350,
+        y = -1377.972,
+        z = 84.345,
+        heading = -96.693,
+        effect = "clean"
     },
     -- Tumbleweed bath
     {
-    	radius = 2.0,
-    	animations = BathingAnimations,
-    	x = -5513.196,
-    	y = -2972.139,
-    	z = -0.75,
-    	heading = 108.131,
-    	effect = "clean"
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = -5513.196,
+        y = -2972.139,
+        z = -0.75,
+        heading = 108.131,
+        effect = "clean"
     },
     -- Van Horn bath
     {
-    	radius = 2.0,
-    	animations = BathingAnimations,
-    	x = 2987.698,
-    	y = 573.760,
-    	z = 47.920,
-    	heading = 171.942,
-    	effect = "clean"
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = 2987.698,
+        y = 573.760,
+        z = 47.920,
+        heading = 171.942,
+        effect = "clean"
     },
     -- Blackwater bath
     {
-    	radius = 2.0,
-    	animations = BathingAnimations,
-    	x = -823.362,
-    	y = -1318.832,
-    	z = 43.679,
-    	heading = 92.793,
-    	effect = "clean"
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = -823.362,
+        y = -1318.832,
+        z = 43.679,
+        heading = 92.793,
+        effect = "clean"
     },
     {
-    	isCompatible = IsPedHumanMale,
-    	objects = {
-    		"p_bath03x"
-    	},
-    	radius = 2.0,
-    	animations = BathingAnimations,
-    	x = -0.5,
-    	y = 0.0,
-    	z = 0.65,
-    	heading = 270.0,
-    	effect = "clean"
+        isCompatible = IsPedHumanMale,
+        objects = {
+            "p_bath03x"
+        },
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = -0.5,
+        y = 0.0,
+        z = 0.65,
+        heading = 270.0,
+        effect = "clean"
     },
     {
         isCompatible = IsPedHuman,
