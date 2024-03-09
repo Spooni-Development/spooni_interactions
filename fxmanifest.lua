@@ -6,6 +6,9 @@ lua54 "yes"
 author "Spooni"
 description "Interaction Script"
 
+server_scripts {
+	"server/*.lua",
+}
 
 client_scripts {
 	"@uiprompt/uiprompt.lua",
