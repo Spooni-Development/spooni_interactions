@@ -1,21 +1,16 @@
-local InteractionMarker
 local StartingCoords
 local CurrentInteraction
 local CanStartInteraction = true
-
-local openmenu
 local inmenu = false
-local prompts = GetRandomIntInRange(0, 0xffffff)
 local availableInteractions
 local MaxRadius = 0.0
-
 local InteractPrompt = Uiprompt:new(Config.Key, Translation[Config.Locale]["INTERACT"], nil, false)
 
-TriggerEvent("vorp_menu:getData",function(call)
-    MenuData = call
+TriggerEvent(Config.Menu..":getData",function(call)
+        MenuData = call
 end)
 
-AddEventHandler("vorp_menu:closemenu",function()
+AddEventHandler(Config.Menu..":closemenu",function()
     if inmenu then
         inmenu = false
         bankinfo = nil
@@ -35,15 +30,15 @@ local entityEnumerator = {
 
 function EnumerateEntities(firstFunc, nextFunc, endFunc)
     return coroutine.wrap(
-    function()
-        local iter, id = firstFunc()
+        function()
+            local iter, id = firstFunc()
 
             if not id or id == 0 then
                 endFunc(iter)
                 return
             end
 
-            local enum = {handle = iter, destructor = endFunc}
+            local enum = { handle = iter, destructor = endFunc }
             setmetatable(enum, entityEnumerator)
 
             local next = true
@@ -52,9 +47,10 @@ function EnumerateEntities(firstFunc, nextFunc, endFunc)
                 next, id = nextFunc(iter)
             until not next
 
-        enum.destructor, enum.handle = nil, nil
-        endFunc(iter)
-    end)
+            enum.destructor, enum.handle = nil, nil
+            endFunc(iter)
+        end
+    )
 end
 
 function EnumerateObjects()
@@ -306,13 +302,15 @@ function menuStartInteraktion(data)
     end
 end
 
-CreateThread(function()
-    while true do
-        local ped = PlayerPedId()
-        CanStartInteraction = not IsPedDeadOrDying(ped) and not IsPedInCombat(ped)
-        Wait(1000)
+CreateThread(
+    function()
+        while true do
+            local ped = PlayerPedId()
+            CanStartInteraction = not IsPedDeadOrDying(ped) and not IsPedInCombat(ped)
+            Wait(1000)
+        end
     end
-end)
+)
 
 function whenKeyJustPressed(key)
     if Citizen.InvokeNative(0x580417101DDB492F, 0, key) then
@@ -404,51 +402,75 @@ CreateThread(function()
 end)
 
 local menuControlCheckPoint = 0
-CreateThread(
-    function()
-        for _, interaction in ipairs(Config.Interactions) do
-            MaxRadius = math.max(MaxRadius, interaction.radius)
-        end
-
-        while true do
-            local playerPed = PlayerPedId()
-
-            if whenKeyJustPressed(Config.Key) and CanStartInteraction then
-                StartInteraction()
-            end
-
-            if inmenu == true then
-                if whenKeyJustPressed(0x6319DB71) then
-                    if menuControlCheckPoint == 0 then
-                        menuControlCheckPoint = tablelength(availableInteractions)
-                    else
-                        menuControlCheckPoint = menuControlCheckPoint - 1
-                        if menuControlCheckPoint ~= 0 then
-                        end
-                    end
-                end
-                if whenKeyJustPressed(0x05CA7C52) then
-                    if menuControlCheckPoint == tablelength(availableInteractions) then
-                        menuControlCheckPoint = 0
-                    else
-                        menuControlCheckPoint = menuControlCheckPoint + 1
-                    end
-                end
-            else
-                if menuControlCheckPoint ~= 0 then
-                    menuControlCheckPoint = 0
-                end
-            end
-
-            Wait(0)
-        end
+CreateThread(function()
+    for _, interaction in ipairs(Config.Interactions) do
+        MaxRadius = math.max(MaxRadius, interaction.radius)
     end
-)
+
+    while true do
+        local playerPed = PlayerPedId()
+
+        if whenKeyJustPressed(Config.Key) and CanStartInteraction then
+            StartInteraction()
+        end
+
+        if inmenu == true then
+            if whenKeyJustPressed(0x6319DB71) then
+                if menuControlCheckPoint == 0 then
+                    menuControlCheckPoint = tablelength(availableInteractions)
+                else
+                    menuControlCheckPoint = menuControlCheckPoint - 1
+                    if menuControlCheckPoint ~= 0 then
+                    end
+                end
+            end
+            if whenKeyJustPressed(0x05CA7C52) then
+                if menuControlCheckPoint == tablelength(availableInteractions) then
+                    menuControlCheckPoint = 0
+                else
+                    menuControlCheckPoint = menuControlCheckPoint + 1
+                end
+            end
+        else
+            if menuControlCheckPoint ~= 0 then
+                menuControlCheckPoint = 0
+            end
+        end
+
+        Wait(0)
+    end
+end)
 
 CreateThread(function()
     while true do
-            if inmenu == true and menuControlCheckPoint ~= 0 then
-            Citizen.InvokeNative(0x2A32FAA57B937173,0x94FDAE17,availableInteractions[menuControlCheckPoint].targetCoords.x,availableInteractions[menuControlCheckPoint].targetCoords.y,availableInteractions[menuControlCheckPoint].targetCoords.z,0,0,0,0,0,0,1.0,1.0,0.1,Config.Marker.R,Config.Marker.G,Config.Marker.B,Config.Marker.A,0,true,2,0,0,0,0)
+        if inmenu == true and menuControlCheckPoint ~= 0 then
+            Citizen.InvokeNative(
+                0x2A32FAA57B937173,
+                0x94FDAE17,
+                availableInteractions[menuControlCheckPoint].targetCoords.x,
+                availableInteractions[menuControlCheckPoint].targetCoords.y,
+                availableInteractions[menuControlCheckPoint].targetCoords.z,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1.0,
+                1.0,
+                0.1,
+                Config.Marker.R,
+                Config.Marker.G,
+                Config.Marker.B,
+                Config.Marker.A,
+                0,
+                true,
+                2,
+                0,
+                0,
+                0,
+                0
+            )
             Citizen.Wait(0)
         else
             Citizen.Wait(300)
@@ -462,7 +484,7 @@ function openInteractionMenu(availableInteractions)
 
     local elements = {}
 
-    table.insert(elements, {label = Translation[Config.Locale]["MENU_CANCEL"], value = "cancel"})
+    table.insert(elements, { label = Translation[Config.Locale]["MENU_CANCEL"], value = "cancel" })
 
     for k, v in pairs(availableInteractions) do
         local data = {}
@@ -470,22 +492,21 @@ function openInteractionMenu(availableInteractions)
         if v.labelText then
             if v.label == "right" then
                 local label = tostring(v.labelText .. Translation[Config.Locale]["MENU_RIGHT"])
-                data = {label = label, value = v.scenario, interaction = availableInteractions[k]}
+                data = { label = label, value = v.scenario, interaction = availableInteractions[k] }
             else
                 local label = tostring(v.labelText)
-                data = {label = label, value = v.scenario, interaction = availableInteractions[k]}
+                data = { label = label, value = v.scenario, interaction = availableInteractions[k] }
             end
         else
-            data = {label = v.labelText2, value = v.scenario, interaction = availableInteractions[k]}
+            data = { label = v.labelText2, value = v.scenario, interaction = availableInteractions[k] }
         end
 
         table.insert(elements, data)
     end
 
-    MenuData.Open(
-        "default",
+    MenuData.Open("default",
         GetCurrentResourceName(),
-        "vorp_menu",
+        Config.Menu.."",
         {
             title = Translation[Config.Locale]["MENU_TITLE"],
             subtext = Translation[Config.Locale]["MENU_SUBTITLE"],

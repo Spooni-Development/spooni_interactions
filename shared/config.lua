@@ -1,16 +1,17 @@
 Config = {}
 
-Config.Locale = "en" -- de, en, fr
+Config.DevMode = true
+Config.Locale       = 'de' -- en, de, fr, es
+Config.Menu  = 'vorp_menu' -- vorp_menu, rsg-menubase, menuapi, redemrp_menu_base
 
 Config.Key = 0x8AAA0AD4 -- LALT
-
-Config.Marker = {R = 255, G = 255, B = 255, A = 100}
+Config.Marker = { R = 255, G = 255, B = 255, A = 100 }
 
 Config.Effects = {
-    ["clean"] = function()
+    ['clean'] = function()
         local ped = PlayerPedId()
         ClearPedEnvDirt(ped)
-        ClearPedDamageDecalByZone(ped, 10, "ALL")
+        ClearPedDamageDecalByZone(ped, 10, 'ALL')
         ClearPedBloodDamage(ped)
     end
 }
@@ -20,7 +21,7 @@ Config.Interactions = {
     -- Pianos
     {
         isCompatible = IsPedHumanMale,
-        objects = {"p_piano03x"},
+        objects = {'p_piano03x'},
         radius = 2.0,
         scenarios = PianoScenarios,
         x = 0.0,
@@ -30,7 +31,7 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"p_piano02x"},
+        objects = {'p_piano02x'},
         radius = 2.0,
         scenarios = PianoScenarios,
         x = 0.0,
@@ -40,7 +41,7 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"p_nbxpiano01x"},
+        objects = {'p_nbxpiano01x'},
         radius = 2.0,
         scenarios = PianoScenarios,
         x = -0.1,
@@ -50,7 +51,7 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"p_nbmpiano01x"},
+        objects = {'p_nbmpiano01x'},
         radius = 2.0,
         scenarios = PianoScenarios,
         x = 0.0,
@@ -59,7 +60,7 @@ Config.Interactions = {
         heading = 0.0
     },
     {
-        objects = {"sha_man_piano01"},
+        objects = {'sha_man_piano01'},
         radius = 2.0,
         scenarios = PianoScenarios,
         x = 0.0,
@@ -79,7 +80,7 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedAdult,
-        objects = {"p_chairrusticsav01x"},
+        objects = {'p_chairrusticsav01x'},
         radius = 1.5,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.0,
@@ -89,8 +90,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"p_bench11x"},
-        label = "left",
+        objects = {'p_bench11x'},
+        label = 'left',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.5,
@@ -100,8 +101,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"p_bench11x"},
-        label = "right",
+        objects = {'p_bench11x'},
+        label = 'right',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = -0.5,
@@ -111,8 +112,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedAdultFemale,
-        objects = {"p_bench11x"},
-        label = "left",
+        objects = {'p_bench11x'},
+        label = 'left',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.5,
@@ -122,8 +123,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedAdultFemale,
-        objects = {"p_bench11x"},
-        label = "right",
+        objects = {'p_bench11x'},
+        label = 'right',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = -0.5,
@@ -133,7 +134,7 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedAdult,
-        objects = {"p_chairtall01x"},
+        objects = {'p_chairtall01x'},
         radius = 1.5,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.0,
@@ -143,7 +144,7 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"p_barstool01x"},
+        objects = {'p_barstool01x'},
         radius = 1.5,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.0,
@@ -164,7 +165,7 @@ Config.Interactions = {
     {
         isCompatible = IsPedHumanFemale,
         objects = GenericBenches,
-        label = "right",
+        label = 'right',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = -0.5,
@@ -175,7 +176,7 @@ Config.Interactions = {
     {
         isCompatible = IsPedHumanFemale,
         objects = GenericBenches,
-        label = "left",
+        label = 'left',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.5,
@@ -186,7 +187,7 @@ Config.Interactions = {
     {
         isCompatible = IsPedHumanMale,
         objects = GenericBenches,
-        label = "right",
+        label = 'right',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = -0.5,
@@ -197,7 +198,7 @@ Config.Interactions = {
     {
         isCompatible = IsPedHumanMale,
         objects = GenericBenches,
-        label = "left",
+        label = 'left',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.5,
@@ -208,10 +209,10 @@ Config.Interactions = {
     {
         isCompatible = IsPedHumanMale,
         objects = {
-            "p_bench17x",
-            "p_benchbear01x"
+            'p_bench17x',
+            'p_benchbear01x'
         },
-        label = "right",
+        label = 'right',
         radius = 1.5,
         scenarios = GenericChairAndBenchScenarios,
         x = -0.3,
@@ -221,10 +222,10 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bench17x",
-            "p_benchbear01x"
+            'p_bench17x',
+            'p_benchbear01x'
         },
-        label = "left",
+        label = 'left',
         radius = 1.5,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.3,
@@ -234,12 +235,12 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bed14x",
-            "p_bed17x",
-            "p_bed21x",
-            "p_bedbunk03x",
-            "p_bedindian02x",
-            "p_cot01x"
+            'p_bed14x',
+            'p_bed17x',
+            'p_bed21x',
+            'p_bedbunk03x',
+            'p_bedindian02x',
+            'p_cot01x'
         },
         radius = 2.0,
         scenarios = BedScenarios,
@@ -250,11 +251,11 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bed20madex",
-            "p_cs_pro_bed_unmade",
-            "p_cs_bed20madex"
+            'p_bed20madex',
+            'p_cs_pro_bed_unmade',
+            'p_cs_bed20madex'
         },
-        label = "right",
+        label = 'right',
         radius = 2.0,
         scenarios = BedScenarios,
         x = -0.3,
@@ -264,11 +265,11 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bed20madex",
-            "p_cs_pro_bed_unmade",
-            "p_cs_bed20madex"
+            'p_bed20madex',
+            'p_cs_pro_bed_unmade',
+            'p_cs_bed20madex'
         },
-        label = "left",
+        label = 'left',
         radius = 2.0,
         scenarios = BedScenarios,
         x = 0.3,
@@ -278,10 +279,10 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_ambbed01x",
-            "p_bed03x",
-            "p_bed09x",
-            "p_bedindian01x"
+            'p_ambbed01x',
+            'p_bed03x',
+            'p_bed09x',
+            'p_bedindian01x'
         },
         radius = 2.0,
         scenarios = BedScenarios,
@@ -292,7 +293,7 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bed05x"
+            'p_bed05x'
         },
         radius = 2.0,
         scenarios = BedScenarios,
@@ -303,10 +304,10 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bed10x",
-            "p_bed12x",
-            "p_bed13x",
-            "p_bed22x"
+            'p_bed10x',
+            'p_bed12x',
+            'p_bed13x',
+            'p_bed22x'
         },
         radius = 2.0,
         scenarios = BedScenarios,
@@ -317,9 +318,9 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bed20x"
+            'p_bed20x'
         },
-        label = "right",
+        label = 'right',
         radius = 2.0,
         scenarios = BedScenarios,
         x = -0.3,
@@ -329,9 +330,9 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bed20x"
+            'p_bed20x'
         },
-        label = "left",
+        label = 'left',
         radius = 2.0,
         scenarios = BedScenarios,
         x = 0.3,
@@ -341,9 +342,9 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bedking02x"
+            'p_bedking02x'
         },
-        label = "left",
+        label = 'left',
         radius = 2.0,
         scenarios = BedScenarios,
         x = -0.5,
@@ -353,9 +354,9 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bedking02x"
+            'p_bedking02x'
         },
-        label = "right",
+        label = 'right',
         radius = 2.0,
         scenarios = BedScenarios,
         x = 0.5,
@@ -365,15 +366,15 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_bedrollopen01x",
-            "p_bedrollopen03x",
-            "p_re_bedrollopen01x",
-            "s_bedrollfurlined01x",
-            "s_bedrollopen01x",
-            "p_amb_mattress04x",
-            "p_mattress04x",
-            "p_mattress07x",
-            "p_mattresscombined01x"
+            'p_bedrollopen01x',
+            'p_bedrollopen03x',
+            'p_re_bedrollopen01x',
+            's_bedrollfurlined01x',
+            's_bedrollopen01x',
+            'p_amb_mattress04x',
+            'p_mattress04x',
+            'p_mattress07x',
+            'p_mattresscombined01x'
         },
         radius = 1.5,
         scenarios = BedScenarios,
@@ -384,9 +385,9 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_cs_ann_wrkr_bed01x",
-            "p_cs_roc_hse_bed",
-            "p_medbed01x"
+            'p_cs_ann_wrkr_bed01x',
+            'p_cs_roc_hse_bed',
+            'p_medbed01x'
         },
         radius = 2.0,
         scenarios = BedScenarios,
@@ -397,9 +398,9 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_cs_bedsleptinbed08x"
+            'p_cs_bedsleptinbed08x'
         },
-        label = "left",
+        label = 'left',
         radius = 2.0,
         scenarios = BedScenarios,
         x = 0.3,
@@ -409,9 +410,9 @@ Config.Interactions = {
     },
     {
         objects = {
-            "p_cs_bedsleptinbed08x"
+            'p_cs_bedsleptinbed08x'
         },
-        label = "right",
+        label = 'right',
         radius = 2.0,
         scenarios = BedScenarios,
         x = 0.3,
@@ -422,8 +423,8 @@ Config.Interactions = {
     ---- Custom
     {
         isCompatible = IsPedHumanFemale,
-        objects = {"p_shoeshinestand01x"},
-        label = "right",
+        objects = {'p_shoeshinestand01x'},
+        label = 'right',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = -0.45,
@@ -433,8 +434,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanFemale,
-        objects = {"p_shoeshinestand01x"},
-        label = "left",
+        objects = {'p_shoeshinestand01x'},
+        label = 'left',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.45,
@@ -444,8 +445,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"p_shoeshinestand01x"},
-        label = "right",
+        objects = {'p_shoeshinestand01x'},
+        label = 'right',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = -0.45,
@@ -455,8 +456,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"p_shoeshinestand01x"},
-        label = "left",
+        objects = {'p_shoeshinestand01x'},
+        label = 'left',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.45,
@@ -467,8 +468,8 @@ Config.Interactions = {
     -- Valentine Church
     {
         isCompatible = IsPedHumanMale,
-        objects = {"churchbench1"},
-        label = "left",
+        objects = {'churchbench1'},
+        label = 'left',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = -1.5,
@@ -478,8 +479,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"churchbench1"},
-        label = "right",
+        objects = {'churchbench1'},
+        label = 'right',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.0,
@@ -489,8 +490,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedAdultFemale,
-        objects = {"churchbench1"},
-        label = "left",
+        objects = {'churchbench1'},
+        label = 'left',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = -1.5,
@@ -500,8 +501,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedAdultFemale,
-        objects = {"churchbench1"},
-        label = "right",
+        objects = {'churchbench1'},
+        label = 'right',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.0,
@@ -511,8 +512,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"churchbench2"},
-        label = "left",
+        objects = {'churchbench2'},
+        label = 'left',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.0,
@@ -522,8 +523,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {"churchbench2"},
-        label = "right",
+        objects = {'churchbench2'},
+        label = 'right',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 1.5,
@@ -533,8 +534,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedAdultFemale,
-        objects = {"churchbench2"},
-        label = "left",
+        objects = {'churchbench2'},
+        label = 'left',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 0.0,
@@ -544,8 +545,8 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedAdultFemale,
-        objects = {"churchbench2"},
-        label = "right",
+        objects = {'churchbench2'},
+        label = 'right',
         radius = 2.0,
         scenarios = GenericChairAndBenchScenarios,
         x = 1.5,
@@ -562,7 +563,7 @@ Config.Interactions = {
         y = 761.86,
         z = 117.45099,
         heading = 100.278,
-        effect = "clean"
+        effect = 'clean'
     },
     -- Saint Denis bath
     {
@@ -572,7 +573,7 @@ Config.Interactions = {
         y = -1223.7757,
         z = 59.6699,
         heading = 2.896,
-        effect = "clean"
+        effect = 'clean'
     },
     -- Strawberry bath
     {
@@ -582,7 +583,7 @@ Config.Interactions = {
         y = -373.23529,
         z = 166.64999,
         heading = 92.105,
-        effect = "clean"
+        effect = 'clean'
     },
     -- Annesburg bath
     {
@@ -592,7 +593,7 @@ Config.Interactions = {
         y = 1335.031494,
         z = 44.496986,
         heading = 154.996,
-        effect = "clean"
+        effect = 'clean'
     },
     -- Bronte mansion bath
     {
@@ -602,7 +603,7 @@ Config.Interactions = {
         y = -1211.780,
         z = 51.888,
         heading = 3.0,
-        effect = "clean"
+        effect = 'clean'
     },
     -- Rhodes bath
     {
@@ -612,7 +613,7 @@ Config.Interactions = {
         y = -1377.972,
         z = 84.345,
         heading = -96.693,
-        effect = "clean"
+        effect = 'clean'
     },
     -- Tumbleweed bath
     {
@@ -622,7 +623,7 @@ Config.Interactions = {
         y = -2972.139,
         z = -0.75,
         heading = 108.131,
-        effect = "clean"
+        effect = 'clean'
     },
     -- Van Horn bath
     {
@@ -632,7 +633,7 @@ Config.Interactions = {
         y = 573.760,
         z = 47.920,
         heading = 171.942,
-        effect = "clean"
+        effect = 'clean'
     },
     -- Blackwater bath
     {
@@ -642,12 +643,12 @@ Config.Interactions = {
         y = -1318.832,
         z = 43.679,
         heading = 92.793,
-        effect = "clean"
+        effect = 'clean'
     },
     {
         isCompatible = IsPedHumanMale,
         objects = {
-            "p_bath03x"
+            'p_bath03x'
         },
         radius = 2.0,
         animations = BathingAnimations,
@@ -655,12 +656,12 @@ Config.Interactions = {
         y = 0.0,
         z = 0.65,
         heading = 270.0,
-        effect = "clean"
+        effect = 'clean'
     },
     {
         isCompatible = IsPedHuman,
         objects = {
-            "p_bath02x"
+            'p_bath02x'
         },
         radius = 1.5,
         animations = BathingAnimations,
@@ -668,6 +669,6 @@ Config.Interactions = {
         y = 0.5,
         z = 1.0,
         heading = 180.0,
-        effect = "clean"
+        effect = 'clean'
     }
 }
