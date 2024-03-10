@@ -1,8 +1,8 @@
 Config = {}
 
 Config.DevMode = true
-Config.Locale       = 'de' -- en, de, fr, es
-Config.Menu  = 'vorp_menu' -- vorp_menu, rsg-menubase, menuapi, redemrp_menu_base
+Config.Locale = 'en' -- en, de, fr, es
+Config.Menu = 'vorp_menu' -- vorp_menu, rsg-menubase, menuapi, redemrp_menu_base
 
 Config.Key = 0x8AAA0AD4 -- LALT
 Config.Marker = { R = 255, G = 255, B = 255, A = 100 }
