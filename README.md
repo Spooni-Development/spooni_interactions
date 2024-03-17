@@ -13,7 +13,7 @@ To install spooni_interactions:
 - Add this ensure in your server.cfg
   - `ensure spooni_interactions`
 
-If you have any problems, you can always open a ticket in the Spooni Discord.
+If you have any problems, you can always open a ticket in the [Spooni Discord](https://discord.gg/spooni).
 
 ## 2. Usage
 Go to a prop in the list and interact with the prompt to open the menu, where you can then select scenarios.
