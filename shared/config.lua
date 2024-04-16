@@ -420,7 +420,86 @@ Config.Interactions = {
         z = 0.5,
         heading = 270.0
     },
+
     ---- Custom
+    -- St. Denis Chruch Chair
+    {
+        isCompatible = IsPedAdult,
+        objects = {'sdchurchchair'},
+        radius = 1.5,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = -0.1,
+        z = -0.1,
+        heading = 180.0
+    },
+    -- St. Denis Chruch Bench
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'sdchurchbench'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.5,
+        y = -0.3,
+        z = -0.375,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'sdchurchbench'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.5,
+        y = -0.3,
+        z = -0.375,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {'sdchurchbench'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.5,
+        y = -0.3,
+        z = -0.375,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {'sdchurchbench'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.5,
+        y = -0.3,
+        z = -0.375,
+        heading = 180.0
+    },
+    -- St. Denis Chruch Organ
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'pipeorgan'},
+        radius = 2.0,
+        scenarios = PianoScenarios,
+        x = 0.0,
+        y = -0.70,
+        z = -0.65,
+        heading = 0.0
+    },
+    {
+        isCompatible = IsPedHumanFemale,
+        objects = {'pipeorgan'},
+        radius = 2.0,
+        scenarios = PianoScenarios,
+        x = 0.0,
+        y = -0.70,
+        z = -0.625,
+        heading = 0.0
+    },
+    -- Shoe stand
     {
         isCompatible = IsPedHumanFemale,
         objects = {'p_shoeshinestand01x'},
@@ -465,7 +544,7 @@ Config.Interactions = {
         z = 1.2,
         heading = 180.0
     },
-    -- Valentine Church
+    -- Valentine Church Bench
     {
         isCompatible = IsPedHumanMale,
         objects = {'churchbench1'},
@@ -554,6 +633,7 @@ Config.Interactions = {
         z = -0.3,
         heading = 180.0
     },
+
     ---- Bath
     -- Valentine bath
     {
@@ -595,7 +675,7 @@ Config.Interactions = {
         heading = 154.996,
         effect = 'clean'
     },
-    -- Bronte mansion bath
+    -- Bronte Mansion bath
     {
         radius = 2.0,
         animations = BathingAnimations,
@@ -659,7 +739,7 @@ Config.Interactions = {
         effect = 'clean'
     },
     {
-        isCompatible = IsPedHuman,
+        isCompatible = IsPedHumanMale,
         objects = {
             'p_bath02x'
         },
