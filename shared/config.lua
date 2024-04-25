@@ -727,7 +727,9 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {'p_bath03x'},
+        objects = {
+            'p_bath03x'
+        },
         radius = 2.0,
         animations = BathingAnimations,
         x = -0.5,
@@ -738,7 +740,9 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {'p_bath02x'},
+        objects = {
+            'p_bath02x'
+        },
         radius = 1.5,
         animations = BathingAnimations,
         x = 0.0,

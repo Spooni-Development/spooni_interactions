@@ -11,10 +11,15 @@ server_scripts {
 }
 
 client_scripts {
+	'@uiprompt/uiprompt.lua',
 	'client/*.lua',
 	'shared/config.lua'
 }
 
 shared_scripts {
 	'shared/*.lua',
+}
+
+dependencies {
+    'uiprompt',
 }
