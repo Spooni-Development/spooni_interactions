@@ -4,7 +4,7 @@ local CanStartInteraction = true
 local inmenu = false
 local availableInteractions
 local MaxRadius = 0.0
-local InteractPrompt = Uiprompt:new(Config.Key, Translation[Config.Locale]["INTERACT"], nil, false)
+local InteractPrompt = Uiprompt:new(Config.Key, Translation[Config.Locale]["prompt_interact"], nil, false)
 
 TriggerEvent(Config.Menu..":getData",function(call)
         MenuData = call
@@ -281,13 +281,7 @@ function StopInteraction()
 
     ClearPedTasksImmediately(ped)
     FreezeEntityPosition(ped, false)
-
     Wait(100)
-
-    if StartingCoords then
-        SetEntityCoordsNoOffset(ped, StartingCoords.x, StartingCoords.y, StartingCoords.z)
-        StartingCoords = nil
-    end
 end
 
 function SetInteractionMarker(target)
@@ -484,14 +478,17 @@ function openInteractionMenu(availableInteractions)
 
     local elements = {}
 
-    table.insert(elements, { label = Translation[Config.Locale]["MENU_CANCEL"], value = "cancel" })
+    table.insert(elements, { label = Translation[Config.Locale]["menu_cancel"], value = "cancel" })
 
     for k, v in pairs(availableInteractions) do
         local data = {}
 
         if v.labelText then
             if v.label == "right" then
-                local label = tostring(v.labelText .. Translation[Config.Locale]["MENU_RIGHT"])
+                local label = tostring(v.labelText .. Translation[Config.Locale]["menu_right"])
+                data = { label = label, value = v.scenario, interaction = availableInteractions[k] }
+            elseif v.label == "left" then
+                local label = tostring(v.labelText .. Translation[Config.Locale]["menu_left"])
                 data = { label = label, value = v.scenario, interaction = availableInteractions[k] }
             else
                 local label = tostring(v.labelText)
@@ -508,8 +505,8 @@ function openInteractionMenu(availableInteractions)
         GetCurrentResourceName(),
         Config.Menu.."",
         {
-            title = Translation[Config.Locale]["MENU_TITLE"],
-            subtext = Translation[Config.Locale]["MENU_SUBTITLE"],
+            title = Translation[Config.Locale]["menu_title"],
+            subtext = Translation[Config.Locale]["menu_subtitle"],
             align = "top-left",
             elements = elements
         },
