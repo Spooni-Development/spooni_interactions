@@ -2,7 +2,6 @@ local StartingCoords
 local CurrentInteraction
 local CanStartInteraction = true
 local inmenu = false
-local player = PlayerPedId()
 local availableInteractions = {}
 local MaxRadius = 0.0
 local InteractPrompt = Uiprompt:new(Config.Key, Translation[Config.Locale]["prompt_interact"], nil, false)
@@ -15,7 +14,7 @@ AddEventHandler(Config.Menu..":closemenu",function()
     if inmenu then
         inmenu = false
         bankinfo = nil
-        ClearPedTasks(player)
+        ClearPedTasks(PlayerPedId())
     end
 end)
 
@@ -98,18 +97,18 @@ function StartInteractionAtCoords(interaction)
     local x, y, z, h = interaction.x, interaction.y, interaction.z, interaction.heading
 
     if not StartingCoords then
-        StartingCoords = GetEntityCoords(player)
+        StartingCoords = GetEntityCoords(PlayerPedId())
     end
 
-    ClearPedTasksImmediately(player)
-    FreezeEntityPosition(player, true)
+    ClearPedTasksImmediately(PlayerPedId())
+    FreezeEntityPosition(PlayerPedId(), true)
 
     if interaction.scenario then
-        TaskStartScenarioAtPosition(player, GetHashKey(interaction.scenario), x, y, z, h, -1, false, true)
+        TaskStartScenarioAtPosition(PlayerPedId(), GetHashKey(interaction.scenario), x, y, z, h, -1, false, true)
     elseif interaction.animation then
-        SetEntityCoordsNoOffset(player, x, y, z)
-        SetEntityHeading(player, h)
-        PlayAnimation(player, interaction.animation)
+        SetEntityCoordsNoOffset(PlayerPedId(), x, y, z)
+        SetEntityHeading(PlayerPedId(), h)
+        PlayAnimation(PlayerPedId(), interaction.animation)
     end
 
     if interaction.effect then
@@ -160,7 +159,7 @@ function AddInteractions(availableInteractions, interaction, playerCoords, targe
 
     if interaction.scenarios then
         for _, scenario in ipairs(interaction.scenarios) do
-            if IsCompatible(scenario, player) then
+            if IsCompatible(scenario, PlayerPedId()) then
                 table.insert(availableInteractions, {
                     x = interaction.x,
                     y = interaction.y,
@@ -182,7 +181,7 @@ function AddInteractions(availableInteractions, interaction, playerCoords, targe
 
     if interaction.animations then
         for _, animation in ipairs(interaction.animations) do
-            if IsCompatible(animation, player) then
+            if IsCompatible(animation, PlayerPedId()) then
                 table.insert(availableInteractions, {
                     x = interaction.x,
                     y = interaction.y,
@@ -203,11 +202,11 @@ function AddInteractions(availableInteractions, interaction, playerCoords, targe
 end
 
 function GetAvailableInteractions()
-    local playerCoords = GetEntityCoords(player)
+    local playerCoords = GetEntityCoords(PlayerPedId())
     availableInteractions = {}
 
     for _, interaction in ipairs(Config.Interactions) do
-        if IsCompatible(interaction, player) then
+        if IsCompatible(interaction, PlayerPedId()) then
             if interaction.objects then
                 for object in EnumerateObjects() do
                     local objectCoords = GetEntityCoords(object)
@@ -253,8 +252,8 @@ end
 
 function StopInteraction()
     CurrentInteraction = nil
-    ClearPedTasksImmediately(player)
-    FreezeEntityPosition(player, false)
+    ClearPedTasksImmediately(PlayerPedId())
+    FreezeEntityPosition(PlayerPedId(), false)
 end
 
 function SetInteractionMarker(target)
@@ -271,7 +270,7 @@ end
 
 CreateThread(function()
     while true do
-        CanStartInteraction = not IsPedDeadOrDying(player) and not IsPedInCombat(player)
+        CanStartInteraction = not IsPedDeadOrDying(PlayerPedId()) and not IsPedInCombat(PlayerPedId())
         Wait(1000)
     end
 end)
@@ -299,10 +298,10 @@ function GetNearbyObjects(coords)
 end
 
 function nearInteractionObject()
-    local playerCoords = GetEntityCoords(player)
+    local playerCoords = GetEntityCoords(PlayerPedId())
 
     for _, interaction in ipairs(Config.Interactions) do
-        if IsCompatible(interaction, player) then
+        if IsCompatible(interaction, PlayerPedId()) then
             if interaction.objects then
                 for _, object in ipairs(GetNearbyObjects(playerCoords)) do
                     local objectCoords = GetEntityCoords(object)
@@ -447,7 +446,7 @@ function openInteractionMenu(availableInteractions)
         function(data, menu)
             menu.close()
             inmenu = false
-            ClearPedTasks(player)
+            ClearPedTasks(PlayerPedId())
         end
     )
 end
