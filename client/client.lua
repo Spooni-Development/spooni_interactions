@@ -2,9 +2,9 @@ local StartingCoords
 local CurrentInteraction
 local CanStartInteraction = true
 local inmenu = false
-local availableInteractions
+local availableInteractions = {}
 local MaxRadius = 0.0
-local InteractPrompt = Uiprompt:new(Config.Key, Translation[Config.Locale]["INTERACT"], nil, false)
+local InteractPrompt = Uiprompt:new(Config.Key, Translation[Config.Locale]["prompt_interact"], nil, false)
 
 TriggerEvent(Config.Menu..":getData",function(call)
         MenuData = call
@@ -94,27 +94,21 @@ function PlayAnimation(ped, anim)
 end
 
 function StartInteractionAtCoords(interaction)
-    local x = interaction.x
-    local y = interaction.y
-    local z = interaction.z
-    local h = interaction.heading
-
-    local ped = PlayerPedId()
+    local x, y, z, h = interaction.x, interaction.y, interaction.z, interaction.heading
 
     if not StartingCoords then
-        StartingCoords = GetEntityCoords(ped)
+        StartingCoords = GetEntityCoords(PlayerPedId())
     end
 
-    ClearPedTasksImmediately(ped)
-
-    FreezeEntityPosition(ped, true)
+    ClearPedTasksImmediately(PlayerPedId())
+    FreezeEntityPosition(PlayerPedId(), true)
 
     if interaction.scenario then
-        TaskStartScenarioAtPosition(ped, GetHashKey(interaction.scenario), x, y, z, h, -1, false, true)
+        TaskStartScenarioAtPosition(PlayerPedId(), GetHashKey(interaction.scenario), x, y, z, h, -1, false, true)
     elseif interaction.animation then
-        SetEntityCoordsNoOffset(ped, x, y, z)
-        SetEntityHeading(ped, h)
-        PlayAnimation(ped, interaction.animation)
+        SetEntityCoordsNoOffset(PlayerPedId(), x, y, z)
+        SetEntityHeading(PlayerPedId(), h)
+        PlayAnimation(PlayerPedId(), interaction.animation)
     end
 
     if interaction.effect then
@@ -137,10 +131,7 @@ function StartInteractionAtObject(interaction)
     local z = interaction.z + objectCoords.z
     local h = interaction.heading + objectHeading
 
-    interaction.x = x
-    interaction.y = y
-    interaction.z = z
-    interaction.heading = h
+    interaction.x, interaction.y, interaction.z, interaction.heading = x, y, z, h
 
     StartInteractionAtCoords(interaction)
 end
@@ -165,52 +156,46 @@ end
 
 function AddInteractions(availableInteractions, interaction, playerCoords, targetCoords, modelName, object)
     local distance = #(playerCoords - targetCoords)
-    local playerPed = PlayerPedId()
+
     if interaction.scenarios then
         for _, scenario in ipairs(interaction.scenarios) do
-            if IsCompatible(scenario, playerPed) then
-                table.insert(
-                    availableInteractions,
-                    {
-                        x = interaction.x,
-                        y = interaction.y,
-                        z = interaction.z,
-                        heading = interaction.heading,
-                        scenario = scenario.name,
-                        object = object,
-                        modelName = modelName,
-                        distance = distance,
-                        label = interaction.label,
-                        effect = interaction.effect,
-                        labelText = scenario.label,
-                        labelText2 = interaction.labelText,
-                        targetCoords = targetCoords
-                    }
-                )
+            if IsCompatible(scenario, PlayerPedId()) then
+                table.insert(availableInteractions, {
+                    x = interaction.x,
+                    y = interaction.y,
+                    z = interaction.z,
+                    heading = interaction.heading,
+                    scenario = scenario.name,
+                    object = object,
+                    modelName = modelName,
+                    distance = distance,
+                    label = interaction.label,
+                    effect = interaction.effect,
+                    labelText = scenario.label,
+                    labelText2 = interaction.labelText,
+                    targetCoords = targetCoords
+                })
             end
         end
     end
 
     if interaction.animations then
         for _, animation in ipairs(interaction.animations) do
-            if IsCompatible(animation, playerPed) then
-                table.insert(
-                    availableInteractions,
-                    {
-                        x = interaction.x,
-                        y = interaction.y,
-                        z = interaction.z,
-                        heading = interaction.heading,
-                        animation = animation,
-                        object = object,
-                        modelName = modelName,
-                        distance = distance,
-                        label = interaction.label,
-                        effect = interaction.effect,
-                        labelText = interaction.labelText,
-                        targetCoords = targetCoords
-                    }
-                )
+            if IsCompatible(animation, PlayerPedId()) then
+                table.insert(availableInteractions, {
+                    x = interaction.x,
+                    y = interaction.y,
+                    z = interaction.z,
+                    heading = interaction.heading,
+                    animation = animation,
+                    object = object,
+                    modelName = modelName,
+                    distance = distance,
+                    label = interaction.label,
+                    effect = interaction.effect,
+                    labelText = interaction.labelText,
+                    targetCoords = targetCoords
+                })
             end
         end
     end
@@ -219,24 +204,16 @@ end
 function GetAvailableInteractions()
     local playerCoords = GetEntityCoords(PlayerPedId())
     availableInteractions = {}
-    local playerPed = PlayerPedId()
+
     for _, interaction in ipairs(Config.Interactions) do
-        if IsCompatible(interaction, playerPed) then
+        if IsCompatible(interaction, PlayerPedId()) then
             if interaction.objects then
                 for object in EnumerateObjects() do
                     local objectCoords = GetEntityCoords(object)
-
                     local modelName = CanStartInteractionAtObject(interaction, object, playerCoords, objectCoords)
 
                     if modelName then
-                        AddInteractions(
-                            availableInteractions,
-                            interaction,
-                            playerCoords,
-                            objectCoords,
-                            modelName,
-                            object
-                        )
+                        AddInteractions(availableInteractions, interaction, playerCoords, objectCoords, modelName, object)
                     end
                 end
             else
@@ -252,7 +229,6 @@ function GetAvailableInteractions()
     end
 
     table.sort(availableInteractions, SortInteractions)
-
     return availableInteractions
 end
 
@@ -276,18 +252,8 @@ end
 
 function StopInteraction()
     CurrentInteraction = nil
-
-    local ped = PlayerPedId()
-
-    ClearPedTasksImmediately(ped)
-    FreezeEntityPosition(ped, false)
-
-    Wait(100)
-
-    if StartingCoords then
-        SetEntityCoordsNoOffset(ped, StartingCoords.x, StartingCoords.y, StartingCoords.z)
-        StartingCoords = nil
-    end
+    ClearPedTasksImmediately(PlayerPedId())
+    FreezeEntityPosition(PlayerPedId(), false)
 end
 
 function SetInteractionMarker(target)
@@ -302,28 +268,20 @@ function menuStartInteraktion(data)
     end
 end
 
-CreateThread(
-    function()
-        while true do
-            local ped = PlayerPedId()
-            CanStartInteraction = not IsPedDeadOrDying(ped) and not IsPedInCombat(ped)
-            Wait(1000)
-        end
+CreateThread(function()
+    while true do
+        CanStartInteraction = not IsPedDeadOrDying(PlayerPedId()) and not IsPedInCombat(PlayerPedId())
+        Wait(1000)
     end
-)
+end)
 
 function whenKeyJustPressed(key)
-    if Citizen.InvokeNative(0x580417101DDB492F, 0, key) then
-        return true
-    else
-        return false
-    end
+    return Citizen.InvokeNative(0x580417101DDB492F, 0, key)
 end
 
 function GetNearbyObjects(coords)
     local itemset = CreateItemset(true)
     local size = Citizen.InvokeNative(0x59B57C4B06531E1E, coords, MaxRadius, itemset, 3, Citizen.ResultAsInteger())
-
     local objects = {}
 
     if size > 0 then
@@ -340,15 +298,13 @@ function GetNearbyObjects(coords)
 end
 
 function nearInteractionObject()
-    local playerPed = PlayerPedId()
-    local playerCoords = GetEntityCoords(playerPed)
+    local playerCoords = GetEntityCoords(PlayerPedId())
 
     for _, interaction in ipairs(Config.Interactions) do
-        if IsCompatible(interaction, playerPed) then
+        if IsCompatible(interaction, PlayerPedId()) then
             if interaction.objects then
                 for _, object in ipairs(GetNearbyObjects(playerCoords)) do
                     local objectCoords = GetEntityCoords(object)
-
                     local modelName = CanStartInteractionAtObject(interaction, object, playerCoords, objectCoords)
 
                     if modelName then
@@ -372,6 +328,7 @@ local nearObject = false
 CreateThread(function()
     while true do
         interact = nearInteractionObject()
+
         if interact == true and CanStartInteraction then
             nearObject = true
         else
@@ -408,28 +365,22 @@ CreateThread(function()
     end
 
     while true do
-        local playerPed = PlayerPedId()
-
         if whenKeyJustPressed(Config.Key) and CanStartInteraction then
-            StartInteraction()
+            if inmenu then
+                inmenu = false
+                Wait(200)
+                MenuData.CloseAll()
+            else
+                StartInteraction()
+            end
         end
 
-        if inmenu == true then
+        if inmenu then
             if whenKeyJustPressed(0x6319DB71) then
-                if menuControlCheckPoint == 0 then
-                    menuControlCheckPoint = tablelength(availableInteractions)
-                else
-                    menuControlCheckPoint = menuControlCheckPoint - 1
-                    if menuControlCheckPoint ~= 0 then
-                    end
-                end
+                menuControlCheckPoint = (menuControlCheckPoint == 0) and tablelength(availableInteractions) or (menuControlCheckPoint - 1)
             end
             if whenKeyJustPressed(0x05CA7C52) then
-                if menuControlCheckPoint == tablelength(availableInteractions) then
-                    menuControlCheckPoint = 0
-                else
-                    menuControlCheckPoint = menuControlCheckPoint + 1
-                end
+                menuControlCheckPoint = (menuControlCheckPoint == tablelength(availableInteractions)) and 0 or (menuControlCheckPoint + 1)
             end
         else
             if menuControlCheckPoint ~= 0 then
@@ -444,33 +395,7 @@ end)
 CreateThread(function()
     while true do
         if inmenu == true and menuControlCheckPoint ~= 0 then
-            Citizen.InvokeNative(
-                0x2A32FAA57B937173,
-                0x94FDAE17,
-                availableInteractions[menuControlCheckPoint].targetCoords.x,
-                availableInteractions[menuControlCheckPoint].targetCoords.y,
-                availableInteractions[menuControlCheckPoint].targetCoords.z,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1.0,
-                1.0,
-                0.1,
-                Config.Marker.R,
-                Config.Marker.G,
-                Config.Marker.B,
-                Config.Marker.A,
-                0,
-                true,
-                2,
-                0,
-                0,
-                0,
-                0
-            )
+            Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, availableInteractions[menuControlCheckPoint].targetCoords.x, availableInteractions[menuControlCheckPoint].targetCoords.y, availableInteractions[menuControlCheckPoint].targetCoords.z, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.1, Config.Marker.R, Config.Marker.G, Config.Marker.B, Config.Marker.A, 0, true, 2, 0, 0, 0, 0)
             Citizen.Wait(0)
         else
             Citizen.Wait(300)
@@ -483,20 +408,16 @@ function openInteractionMenu(availableInteractions)
     MenuData.CloseAll()
 
     local elements = {}
-
-    table.insert(elements, { label = Translation[Config.Locale]["MENU_CANCEL"], value = "cancel" })
+    table.insert(elements, { label = Translation[Config.Locale]["menu_cancel"], value = "cancel" })
 
     for k, v in pairs(availableInteractions) do
         local data = {}
 
         if v.labelText then
-            if v.label == "right" then
-                local label = tostring(v.labelText .. Translation[Config.Locale]["MENU_RIGHT"])
-                data = { label = label, value = v.scenario, interaction = availableInteractions[k] }
-            else
-                local label = tostring(v.labelText)
-                data = { label = label, value = v.scenario, interaction = availableInteractions[k] }
-            end
+            local label = v.label == "left" and (tostring(v.labelText .. Translation[Config.Locale]["menu_left"])) or
+                          v.label == "right" and (tostring(v.labelText .. Translation[Config.Locale]["menu_right"])) or
+                          tostring(v.labelText)
+            data = { label = label, value = v.scenario, interaction = availableInteractions[k] }
         else
             data = { label = v.labelText2, value = v.scenario, interaction = availableInteractions[k] }
         end
@@ -504,12 +425,10 @@ function openInteractionMenu(availableInteractions)
         table.insert(elements, data)
     end
 
-    MenuData.Open("default",
-        GetCurrentResourceName(),
-        Config.Menu.."",
+    MenuData.Open("default", GetCurrentResourceName(), Config.Menu,
         {
-            title = Translation[Config.Locale]["MENU_TITLE"],
-            subtext = Translation[Config.Locale]["MENU_SUBTITLE"],
+            title = Translation[Config.Locale]["menu_title"],
+            subtext = Translation[Config.Locale]["menu_subtitle"],
             align = "top-left",
             elements = elements
         },
@@ -519,18 +438,13 @@ function openInteractionMenu(availableInteractions)
                 menu.close()
                 inmenu = false
             else
-                if data.current.interaction.scenario then
-                    menuStartInteraktion(data.current.interaction)
-                else
-                    menuStartInteraktion(data.current.interaction)
-                end
+                menuStartInteraktion(data.current.interaction)
                 menu.close()
                 inmenu = false
             end
         end,
         function(data, menu)
             menu.close()
-            -- DisplayRadar(true)
             inmenu = false
             ClearPedTasks(PlayerPedId())
         end
