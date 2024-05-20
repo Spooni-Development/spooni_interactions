@@ -200,135 +200,149 @@ GenericBenches = {
 GenericChairAndBenchScenarios = {
     {
         name = 'GENERIC_SEAT_BENCH_SCENARIO',
-        label = Translation[Config.Locale]['GENERIC_SEAT_BENCH_SCENARIO']
+        label = Translation[Config.Locale]['generic_seat_bench_scenario']
     },
     {
         name = 'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_DRINKING',
-        label = Translation[Config.Locale]['MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_DRINKING']
+        label = Translation[Config.Locale]['mp_lobby_prop_human_seat_bench_porch_drinking']
     },
     {
         name = 'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_SMOKING',
-        label = Translation[Config.Locale]['MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_SMOKING']
+        label = Translation[Config.Locale]['mp_lobby_prop_human_seat_bench_porch_smoking']
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_LANGTON',
+        isCompatible = IsPedHumanMale,
+        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_LANGTON']
     },
     {
         name = 'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR',
-        label = Translation[Config.Locale]['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR']
+        label = Translation[Config.Locale]['mp_lobby_prop_human_seat_chair']
     },
     {
         name = 'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE',
-        label = Translation[Config.Locale]['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE']
+        label = Translation[Config.Locale]['mp_lobby_prop_human_seat_chair_whittle']
     },
     {
         name = 'PROP_CAMP_FIRE_SEAT_CHAIR',
-        label = Translation[Config.Locale]['PROP_CAMP_FIRE_SEAT_CHAIR']
+        label = Translation[Config.Locale]['prop_camp_fire_seat_chair']
     },
     {
         name = 'PROP_HUMAN_SEAT_BENCH_CONCERTINA',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_BENCH_CONCERTINA']
+        label = Translation[Config.Locale]['prop_human_seat_bench_concertina']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_FAN',
         isCompatible = IsPedHumanFemale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_FAN']
+        label = Translation[Config.Locale]['prop_human_seat_chair_fan']
     },
     {
         name = 'PROP_HUMAN_SEAT_BENCH_JAW_HARP',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_BENCH_JAW_HARP']
+        label = Translation[Config.Locale]['prop_human_seat_bench_jaw_harp']
     },
     {
         name = 'PROP_HUMAN_SEAT_BENCH_MANDOLIN',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_BENCH_MANDOLIN']
+        label = Translation[Config.Locale]['prop_human_seat_bench_mandolin']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR',
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR']
+        label = Translation[Config.Locale]['prop_human_seat_chair']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_BANJO',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_BANJO']
+        label = Translation[Config.Locale]['prop_human_seat_chair_banjo']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_CIGAR',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_CIGAR']
+        label = Translation[Config.Locale]['prop_human_seat_chair_cigar']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_GROOMING_GROSS',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_GROOMING_GROSS']
+        label = Translation[Config.Locale]['prop_human_seat_chair_grooming_gross']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_GROOMING_POSH',
         isCompatible = IsPedHumanFemale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_GROOMING_POSH']
+        label = Translation[Config.Locale]['prop_human_seat_chair_grooming_posh']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_GUITAR',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_GUITAR']
+        label = Translation[Config.Locale]['prop_human_seat_chair_guitar']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS']
+        label = Translation[Config.Locale]['prop_human_seat_chair_knife_badass']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_KNITTING',
         isCompatible = IsPedHumanFemale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_KNITTING']
+        label = Translation[Config.Locale]['prop_human_seat_chair_knitting']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_PORCH',
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_PORCH']
+        label = Translation[Config.Locale]['prop_human_seat_chair_porch']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_READING',
         isCompatible = IsPedHumanFemale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_READING']
+        label = Translation[Config.Locale]['prop_human_seat_chair_reading']
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING',
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING']
+        label = Translation[Config.Locale]['prop_human_seat_chair_table_drinking']
     },
     {
         name = 'PROP_HUMAN_SEAT_BENCH_HARMONICA',
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_BENCH_HARMONICA']
-    }
+        label = Translation[Config.Locale]['prop_human_seat_bench_harmonica']
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_SMOKE_ROLL',
+        label = Translation[Config.Locale]['prop_human_seat_chair_smoke_roll']
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_FISHING_ROD',
+        isCompatible = IsPedHumanMale,
+        label = Translation[Config.Locale]['prop_human_seat_chair_fishing_rod']
+    },
 }
 
 BedScenarios = {
     {
         name = 'PROP_HUMAN_SLEEP_BED_PILLOW',
-        label = Translation[Config.Locale]['PROP_HUMAN_SLEEP_BED_PILLOW']
+        label = Translation[Config.Locale]['prop_human_sleep_bed_pillow']
     },
     {
         name = 'PROP_HUMAN_SLEEP_BED_PILLOW_HIGH',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SLEEP_BED_PILLOW_HIGH']
+        label = Translation[Config.Locale]['prop_human_sleep_bed_pillow_high']
     },
     {
         name = 'WORLD_HUMAN_SLEEP_GROUND_ARM',
-        label = Translation[Config.Locale]['WORLD_HUMAN_SLEEP_GROUND_ARM']
+        label = Translation[Config.Locale]['world_human_sleep_ground_arm']
     },
     {
         name = 'WORLD_HUMAN_SLEEP_GROUND_PILLOW',
-        label = Translation[Config.Locale]['WORLD_HUMAN_SLEEP_GROUND_PILLOW']
+        label = Translation[Config.Locale]['world_human_sleep_ground_pillow']
     },
     {
         name = 'WORLD_HUMAN_SIT_FALL_ASLEEP',
-        label = Translation[Config.Locale]['WORLD_HUMAN_SIT_FALL_ASLEEP']
+        label = Translation[Config.Locale]['world_human_sit_fall_asleep']
     },
     {
         name = 'WORLD_PLAYER_SLEEP_BEDROLL',
-        label = Translation[Config.Locale]['WORLD_PLAYER_SLEEP_BEDROLL']
+        label = Translation[Config.Locale]['world_player_sleep_bedroll']
     },
     {
         name = 'WORLD_PLAYER_SLEEP_GROUND',
-        label = Translation[Config.Locale]['WORLD_PLAYER_SLEEP_GROUND']
+        label = Translation[Config.Locale]['world_player_sleep_ground']
     }
 }
 
@@ -336,53 +350,53 @@ PianoScenarios = {
     {
         name = 'PROP_HUMAN_PIANO',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_PIANO']
+        label = Translation[Config.Locale]['prop_human_piano']
     },
     {
         name = 'PROP_HUMAN_PIANO_UPPERCLASS',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_PIANO_UPPERCLASS']
+        label = Translation[Config.Locale]['prop_human_piano_upperclass']
     },
     {
         name = 'PROP_HUMAN_PIANO_RIVERBOAT',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_PIANO_RIVERBOAT']
+        label = Translation[Config.Locale]['prop_human_piano_riverboat']
     },
     {
         name = 'PROP_HUMAN_PIANO_SKETCHY',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_PIANO_SKETCHY']
+        label = Translation[Config.Locale]['prop_human_piano_sketchy']
     },
     {
         name = 'PROP_HUMAN_ABIGAIL_PIANO',
         isCompatible = IsPedHumanFemale,
-        label = Translation[Config.Locale]['PROP_HUMAN_ABIGAIL_PIANO']
+        label = Translation[Config.Locale]['prop_human_abigail_piano']
     }
 }
 
 BathingAnimations = {
     {
-        label = Translation[Config.Locale]['BATH'],
+        label = Translation[Config.Locale]['bath'],
         dict = 'mini_games@bathing@regular@arthur',
         name = 'bathing_idle_02'
     },
     {
-        label = Translation[Config.Locale]['BATH_SCRUB_LEFT_ARM'],
+        label = Translation[Config.Locale]['bath_scrub_left_arm'],
         dict = 'mini_games@bathing@regular@arthur',
         name = 'left_arm_scrub_medium'
     },
     {
-        label = Translation[Config.Locale]['BATH_SCRUB_RIGHT_ARM'],
+        label = Translation[Config.Locale]['bath_scrub_right_arm'],
         dict = 'mini_games@bathing@regular@arthur',
         name = 'right_arm_scrub_medium'
     },
     {
-        label = Translation[Config.Locale]['BATH_SCRUB_LEFT_LEG'],
+        label = Translation[Config.Locale]['bath_scrub_left_leg'],
         dict = 'mini_games@bathing@regular@arthur',
         name = 'left_leg_scrub_medium'
     },
     {
-        label = Translation[Config.Locale]['BATH_SCRUB_RIGHT_LEG'],
+        label = Translation[Config.Locale]['bath_scrub_right_leg'],
         dict = 'mini_games@bathing@regular@arthur',
         name = 'right_leg_scrub_medium'
     }
