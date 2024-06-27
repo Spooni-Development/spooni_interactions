@@ -6,20 +6,28 @@ lua54 'yes'
 author 'Spooni'
 description 'Interaction Script'
 
+ui_page {
+	'nui://jo_libs/nui/menu/index.html'
+}
+
 server_scripts {
 	'server/*.lua',
 }
 
 client_scripts {
-	'@uiprompt/uiprompt.lua',
 	'client/*.lua',
-	'shared/config.lua'
+	'shared/*.lua'
 }
 
 shared_scripts {
+	'@jo_libs/init.lua',
 	'shared/*.lua',
 }
 
+jo_libs {
+	'menu',
+}
+
 dependencies {
-    'uiprompt',
+    'jo_libs',
 }

@@ -1,11 +1,9 @@
 Config = {}
 
-Config.DevMode = true
+Config.DevMode = true -- true or false
 Config.Locale = 'en' -- en, de, fr, es
-Config.Menu = 'vorp_menu' -- vorp_menu, rsg-menubase, menuapi, redemrp_menu_base
 
-Config.Key = 0x8AAA0AD4 -- LALT
-Config.Marker = { R = 255, G = 255, B = 255, A = 100 }
+Config.Key = 0x8AAA0AD4 -- [LALT]
 
 Config.Effects = {
     ['clean'] = function()
@@ -16,8 +14,7 @@ Config.Effects = {
     end
 }
 
--- List of interactable types of objects.
-Config.Interactions = {
+Config.Interactions = { -- List of interactable types of objects.
     -- Pianos
     {
         isCompatible = IsPedHumanMale,
@@ -727,9 +724,7 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {
-            'p_bath03x'
-        },
+        objects = {'p_bath03x'},
         radius = 2.0,
         animations = BathingAnimations,
         x = -0.5,
@@ -740,9 +735,7 @@ Config.Interactions = {
     },
     {
         isCompatible = IsPedHumanMale,
-        objects = {
-            'p_bath02x'
-        },
+        objects = {'p_bath02x'},
         radius = 1.5,
         animations = BathingAnimations,
         x = 0.0,
