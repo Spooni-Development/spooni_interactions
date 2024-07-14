@@ -179,7 +179,8 @@ local function AddInteractions(availableInteractions, interaction, playerCoords,
                     distance = distance,
                     label = interaction.label,
                     effect = interaction.effect,
-                    labelText = interaction.labelText,
+                    labelText = animation.label,
+                    labelText2 = interaction.labelText,
                     targetCoords = targetCoords
                 })
             end
