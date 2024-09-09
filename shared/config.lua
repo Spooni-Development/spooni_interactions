@@ -1,7 +1,7 @@
 Config = {}
 
 Config.DevMode = true -- true or false
-Config.Locale = 'en' -- en, de, fr, es
+Config.Locale = 'en' -- en, de
 
 Config.Key = 0x8AAA0AD4 -- [LALT]
 

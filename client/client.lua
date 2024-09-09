@@ -4,6 +4,7 @@ local CurrentInteraction = nil
 local InMenu = false
 local MaxRadius = 0.0
 local promptGroup = GetRandomIntInRange(0, 0xffffff)
+local MenuData = exports.vorp_menu:GetMenuData()
 local StartingCoords = nil
 local UIPrompt = {}
 
@@ -179,7 +180,8 @@ local function AddInteractions(availableInteractions, interaction, playerCoords,
                     distance = distance,
                     label = interaction.label,
                     effect = interaction.effect,
-                    labelText = interaction.labelText,
+                    labelText = animation.label,
+                    labelText2 = interaction.labelText,
                     targetCoords = targetCoords
                 })
             end
@@ -234,51 +236,62 @@ end
 
 local function openInteractionMenu(availableInteractions)
     InMenu = true
-    jo.menu.show(false)
+    MenuData.CloseAll()
 
-    local id = GetCurrentResourceName() .. "_menu"
-    local data = {
-        title = Translation[Config.Locale]["menu_title"],
-        subtitle = Translation[Config.Locale]["menu_subtitle"],
-        numberOnScreen = 10,
-        onBack = function()
-            jo.menu.show(false)
-        end
-    }
-    local menu = jo.menu.create(id,data)
+    local elements = {}
 
-    menu:addItem({
-        title = Translation[Config.Locale]["menu_cancel"],
-        onClick = function()
-            StopInteraction()
-            jo.menu.show(false)
-            InMenu = false
-        end,
-    })
+    table.insert(elements, { label = Translation[Config.Locale]["menu_cancel"], value = "cancel" })
 
-    for _, interaction in ipairs(availableInteractions) do
-        local label
-        if interaction.labelText then
-            label = interaction.label == "left" and (tostring(interaction.labelText .. Translation[Config.Locale]["menu_left"])) or interaction.label == "right" and (tostring(interaction.labelText .. Translation[Config.Locale]["menu_right"])) or tostring(interaction.labelText)
+    for k, v in pairs(availableInteractions) do
+        local data = {}
+
+        if v.labelText then
+            local label
+            if v.label == "left" then
+                label = tostring(v.labelText .. Translation[Config.Locale]["menu_left"])
+            elseif v.label == "right" then
+                label = tostring(v.labelText .. Translation[Config.Locale]["menu_right"])
+            else
+                label = tostring(v.labelText)
+            end
+            data = { label = label, value = v.scenario, interaction = availableInteractions[k] }
         else
-            label = interaction.labelText2
+            data = { label = v.labelText2, value = v.scenario, interaction = availableInteractions[k] }
         end
+        
 
-        menu:addItem({
-            title = label,
-            onClick = function()
-                menuStartInteraktion(interaction)
-                jo.menu.show(false)
-                InMenu = false
-            end,
-        })
+        table.insert(elements, data)
     end
 
-    menu:send()
-    jo.menu.setCurrentMenu(id)
-    jo.menu.show(true)
-    Citizen.Wait(10)
-    Debug(jo.menu.isOpen())
+    MenuData.Open("default", GetCurrentResourceName(), "spooni_interactions",
+        {
+            title = Translation[Config.Locale]["menu_title"],
+            subtext = Translation[Config.Locale]["menu_subtitle"],
+            align = "top-left",
+            elements = elements
+        },
+        function(data, menu)
+            if data.current.value == "cancel" then
+                StopInteraction()
+                menu.close()
+                InMenu = false
+            else
+                if data.current.interaction.scenario then
+                    menuStartInteraktion(data.current.interaction)
+                else
+                    menuStartInteraktion(data.current.interaction)
+                end
+                menu.close()
+                InMenu = false
+            end
+        end,
+        function(data, menu)
+            menu.close()
+            -- DisplayRadar(true)
+            InMenu = false
+            ClearPedTasks(PlayerPedId())
+        end
+    )
 end
 
 local function StartInteraction()
@@ -288,7 +301,7 @@ local function StartInteraction()
         openInteractionMenu(AvailableInteractions)
     else
         if InMenu then
-            jo.menu.show(false)
+            MenuData.CloseAll()
         end
         InMenu = false
         if CurrentInteraction then
@@ -355,7 +368,7 @@ CreateThread(function()
         if isNearInteractionObject == true and CanStartInteraction then
             nearObject = true
         else
-            jo.menu.show(false)
+            MenuData.CloseAll()
             nearObject = false
         end
         Citizen.Wait(500)
@@ -387,8 +400,8 @@ AddEventHandler('onResourceStop', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then
       return
     end
-    if menu then
-        jo.menu.show(false)
+    if InMenu then
+        MenuData.close()
     end
     StopInteraction()
 end)

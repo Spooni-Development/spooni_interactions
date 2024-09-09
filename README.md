@@ -1,17 +1,25 @@
-# :chair: Interactions
+# 🪑 Interactions
+Documentation relating to the [spooni_interactions](https://github.com/Spooni-Development/spooni_interactions).
 
 ## 1. Installation
 spooni_interactions works Standalone. 
 
 To install spooni_interactions:
 - Download the resource
-  - On [Github](https://github.com/Spooni-Development/spooni_interactions)
+  - On [Github](https://github.com/Emotion06/spooni_interactions)
 - Ensure that all requirements are installed
-  - [jo_libs](https://github.com/Jump-On-Studios/RedM-jo_libs)
+  - [vorp_menu](https://github.com/VORPCORE/vorp_menu)
 - Drag and drop the resource into your resources folder
   - `spooni_interactions`
 - Add this ensure in your server.cfg
-  - `ensure spooni_interactions`
+  ```
+    ensure spooni_interactions
+  ```
+- Now you can configure and translate the script as you like
+  - `config.lua`
+  - `translation.lua`
+- At the end
+  - Restart the server
 
 If you have any problems, you can always open a ticket in the [Spooni Discord](https://discord.gg/spooni).
 
