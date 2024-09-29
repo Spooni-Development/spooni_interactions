@@ -6,7 +6,7 @@ spooni_interactions works Standalone.
 
 To install spooni_interactions:
 - Download the resource
-  - On [Github](https://github.com/Emotion06/spooni_interactions)
+  - On [Github](https://github.com/Spooni-Development/spooni_interactions)
 - Ensure that all requirements are installed
   - [vorp_menu](https://github.com/VORPCORE/vorp_menu)
 - Drag and drop the resource into your resources folder
