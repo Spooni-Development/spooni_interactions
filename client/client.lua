@@ -379,7 +379,7 @@ end)
 CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if nearObject == true and CanStartInteraction then
+        if not isAreaBanned(GetEntityCoords(PlayerPedId())) and nearObject == true and CanStartInteraction then
             UIPrompt.activate(Translation[Config.Locale]['prompt_group'])
         else
             Citizen.Wait(500)
@@ -406,3 +406,13 @@ AddEventHandler('onResourceStop', function(resourceName)
     end
     StopInteraction()
 end)
+
+isAreaBanned = function (coords)
+	for k,v in pairs(Config.BannedAreas) do
+        local dist = GetDistanceBetweenCoords(coords.x,coords.y,coords.z,v.x,v.y,v.z,true)
+		if dist < v.r then
+			return true
+		end
+	end
+	return false
+end
