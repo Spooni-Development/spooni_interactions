@@ -14,6 +14,10 @@ Config.Effects = {
     end
 }
 
+Config.BannedAreas = {
+    {x = -306.482, y = 809.1139, z = 118.98, r = 5}, -- r = radius
+}
+
 Config.Interactions = { -- List of interactable types of objects.
     -- Pianos
     {
