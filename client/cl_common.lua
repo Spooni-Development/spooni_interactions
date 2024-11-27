@@ -401,3 +401,27 @@ BathingAnimations = {
         name = 'right_leg_scrub_medium'
     }
 }
+
+
+DancingAnimations = {
+    {
+        label = Translation[Config.Locale]['sword'],
+        dict = 'script_shows@sworddance@act3_p1',
+        name = 'dancer_sworddance'
+    },
+    {
+        label = Translation[Config.Locale]['cancan'],
+        dict = 'script_shows@cancandance@p2',
+        name = 'cancandance_p2_fem1'
+    },
+    {
+        label = Translation[Config.Locale]['fire'],
+        dict = 'script_shows@firebreather@act2_p1',
+        name = 'dancer_dance'
+    },
+    {
+        label = Translation[Config.Locale]['snake'],
+        dict = 'script_shows@snakedancer@act1_p1',
+        name = 'dance_dancer'
+    },
+}

@@ -11,6 +11,8 @@ Translation = {
         ['menu_cancel'] = 'Cancel Interaction',
         ['menu_right'] = ' - Right',
         ['menu_left'] = ' - Left',
+        ['menu_middle'] = ' - Middle',
+        ['menu_up'] = ' - Up',
         -- Chairs & Benches
         ['generic_seat_bench_scenario'] = 'Bench',
         ['mp_lobby_prop_human_seat_bench_porch_drinking'] = 'Beer',
@@ -56,7 +58,12 @@ Translation = {
         ['bath_scrub_left_arm'] = 'Scrub left arm',
         ['bath_scrub_right_arm'] = 'Scrub right arm',
         ['bath_scrub_left_leg'] = 'Scrub left leg',
-        ['bath_scrub_right_leg'] = 'Scrub right leg'
+        ['bath_scrub_right_leg'] = 'Scrub right leg',
+        -- Pole
+        ['sword'] = 'Sword Dance',
+        ['cancan'] = 'Cancan Dance',
+        ['fire'] = 'Fire Dance',
+        ['snake'] = 'Snake Dance',
     },
     ['de'] = {
         -- Prompt
@@ -68,6 +75,8 @@ Translation = {
         ['menu_cancel'] = 'Interaktion abbrechen',
         ['menu_right'] = ' - Rechts',
         ['menu_left'] = ' - Links',
+        ['menu_middle'] = ' - Mitte',
+        ['menu_up'] = ' - Oben',
         -- Chairs & Benches
         ['generic_seat_bench_scenario'] = 'Bench',
         ['mp_lobby_prop_human_seat_bench_porch_drinking'] = 'Beer',
@@ -113,6 +122,12 @@ Translation = {
         ['bath_scrub_left_arm'] = 'Linken Arm waschen',
         ['bath_scrub_right_arm'] = 'Rechten Arm waschen',
         ['bath_scrub_left_leg'] = 'Linkes Bein waschen',
-        ['bath_scrub_right_leg'] = 'Rechtes Bein waschen'
+        ['bath_scrub_right_leg'] = 'Rechtes Bein waschen',
+        -- Pole
+        ['sword'] = 'Schwerttanz',
+        ['cancan'] = 'Krebstanz',
+        ['fire'] = 'Feuertanz',
+        ['snake'] = 'Schlangentanz',
+
     },
 }

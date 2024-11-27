@@ -251,6 +251,10 @@ local function openInteractionMenu(availableInteractions)
                 label = tostring(v.labelText .. Translation[Config.Locale]["menu_left"])
             elseif v.label == "right" then
                 label = tostring(v.labelText .. Translation[Config.Locale]["menu_right"])
+            elseif v.label == "middle" then
+                label = tostring(v.labelText .. Translation[Config.Locale]["menu_middle"])
+            elseif v.label == "up" then
+                label = tostring(v.labelText .. Translation[Config.Locale]["menu_up"])
             else
                 label = tostring(v.labelText)
             end
@@ -258,12 +262,11 @@ local function openInteractionMenu(availableInteractions)
         else
             data = { label = v.labelText2, value = v.scenario, interaction = availableInteractions[k] }
         end
-        
 
         table.insert(elements, data)
     end
 
-    MenuData.Open("default", GetCurrentResourceName(), "spooni_interactions",
+    MenuData.Open("default", GetCurrentResourceName(), "vorp_menu",
         {
             title = Translation[Config.Locale]["menu_title"],
             subtext = Translation[Config.Locale]["menu_subtitle"],
@@ -287,7 +290,6 @@ local function openInteractionMenu(availableInteractions)
         end,
         function(data, menu)
             menu.close()
-            -- DisplayRadar(true)
             InMenu = false
             ClearPedTasks(PlayerPedId())
         end
@@ -365,11 +367,14 @@ CreateThread(function()
     while true do
         Citizen.Wait(0)
         local isNearInteractionObject = nearInteractionObject()
-        if isNearInteractionObject == true and CanStartInteraction then
+        if isNearInteractionObject and CanStartInteraction then
             nearObject = true
         else
-            MenuData.CloseAll()
             nearObject = false
+            if InMenu then
+                InMenu = false
+                MenuData.CloseAll()
+            end
         end
         Citizen.Wait(500)
     end
@@ -401,7 +406,7 @@ AddEventHandler('onResourceStop', function(resourceName)
       return
     end
     if InMenu then
-        MenuData.close()
+        MenuData.CloseAll()
     end
     StopInteraction()
 end)

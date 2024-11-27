@@ -204,6 +204,56 @@ Config.Interactions = { -- List of interactable types of objects.
         heading = 180.0
     },
     {
+        objects = {'p_benchlong05x'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 1.2,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {'p_benchlong05x'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.6,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {'p_benchlong05x'},
+        label = 'middle',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.3,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {'p_chairconvoround01x'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.7,
+        y = -0.7,
+        z = 0.45,
+        heading = 132
+    },
+    {
+        objects = {'p_chairconvoround01x'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.7,
+        y = -0.6,
+        z = 0.45,
+        heading = 225
+    },
+    {
         isCompatible = IsPedHumanMale,
         objects = {
             'p_bench17x',
@@ -244,6 +294,16 @@ Config.Interactions = { -- List of interactable types of objects.
         x = 0.0,
         y = 0.0,
         z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {'p_bedbunk03x'},
+        label = 'up',
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = 1.68,
         heading = 180.0
     },
     {
@@ -630,6 +690,16 @@ Config.Interactions = { -- List of interactable types of objects.
         z = -0.3,
         heading = 180.0
     },
+    -- Pole Prop
+    {
+        objects = {'pole'},
+        radius = 1.5,
+        animations = DancingAnimations,
+        x = 0.0,
+        y = 0.5,
+        z = 1.0,
+        heading = 180.0,
+    },
 
     ---- Bath
     -- Valentine bath
@@ -743,5 +813,5 @@ Config.Interactions = { -- List of interactable types of objects.
         z = 1.0,
         heading = 180.0,
         effect = 'clean'
-    }
+    },
 }

@@ -5,6 +5,7 @@ lua54 'yes'
 
 author 'Spooni'
 description 'Interaction Script'
+version '8'
 
 server_scripts {
 	'server/*.lua',
