@@ -65,6 +65,70 @@ Translation = {
         ['fire'] = 'Fire Dance',
         ['snake'] = 'Snake Dance',
     },
+    ['it'] = {
+        -- Prompt
+        ['prompt_interact'] = 'Siediti~o~/~q~Alzati',
+        ['prompt_group'] = 'Interazioni',
+        -- Menu
+        ['menu_title'] = 'Interazioni',
+        ['menu_subtitle'] = 'Interagisci con l\'ambiente...',
+        ['menu_cancel'] = 'Annulla Interazione',
+        ['menu_right'] = ' - Destra',
+        ['menu_left'] = ' - Sinistra',
+        ['menu_middle'] = ' - Centro',
+        ['menu_up'] = ' - Su',
+        -- Chairs & Benches
+        ['generic_seat_bench_scenario'] = 'Panchina',
+        ['mp_lobby_prop_human_seat_bench_porch_drinking'] = 'Birra',
+        ['prop_human_seat_chair_table_drinking'] = 'Birra 2',
+        ['prop_human_seat_chair_banjo'] = 'Banjo',
+        ['prop_human_seat_chair_cigar'] = 'Sigaro',
+        ['mp_lobby_prop_human_seat_bench_porch_smoking'] = 'Sigaretta',
+        ['PROP_HUMAN_SEAT_CHAIR_LANGTON'] = 'Sigaretta 2',
+        ['prop_human_seat_chair'] = 'Sedia',
+        ['prop_human_seat_bench_concertina'] = 'Concertina',
+        ['prop_camp_fire_seat_chair'] = 'Falò',
+        ['prop_human_seat_chair_fan'] = 'Ventaglio', -- Female
+        ['prop_human_seat_chair_fishing_rod'] = 'Canna da pesca',
+        ['prop_human_seat_chair_grooming_posh'] = 'Lima unghie', -- Female
+        ['prop_human_seat_chair_grooming_gross'] = 'Triste',
+        ['prop_human_seat_chair_guitar'] = 'Chitarra',
+        ['prop_human_seat_bench_harmonica'] = 'Armonica',
+        ['prop_human_seat_bench_jaw_harp'] = 'Scacciapensieri',
+        ['prop_human_seat_chair_knife_badass'] = 'Coltello',
+        ['prop_human_seat_chair_knitting'] = 'Maglieria', -- Female
+        ['prop_human_seat_bench_mandolin'] = 'Mandolino',
+        ['mp_lobby_prop_human_seat_chair'] = 'Siediti',
+        ['prop_human_seat_chair_porch'] = 'Portico',
+        ['prop_human_seat_chair_reading'] = 'Lettura', -- Female
+        ['prop_human_seat_chair_smoke_roll'] = 'Rolla sigaretta',
+        ['mp_lobby_prop_human_seat_chair_whittle'] = 'Intaglia',
+        -- Bed
+        ['prop_human_sleep_bed_pillow'] = 'Fianco',
+        ['prop_human_sleep_bed_pillow_high'] = 'Schiena',
+        ['world_human_sleep_ground_arm'] = 'Siediti',
+        ['world_human_sleep_ground_pillow'] = 'Pancia in giù',
+        ['world_human_sit_fall_asleep'] = 'Gambe incrociate',
+        ['world_player_sleep_bedroll'] = 'Accovacciato',
+        ['world_player_sleep_ground'] = 'Russare',
+        -- Piano
+        ['prop_human_piano'] = 'Normale',
+        ['prop_human_piano_upperclass'] = 'Alta classe',
+        ['prop_human_piano_riverboat'] = 'Riverboat',
+        ['prop_human_piano_sketchy'] = 'Sospetto',
+        ['prop_human_abigail_piano'] = 'Normale', -- Female
+        -- Bath
+        ['bath'] = 'Bagno',
+        ['bath_scrub_left_arm'] = 'Strofina braccio sinistro',
+        ['bath_scrub_right_arm'] = 'Strofina braccio destro',
+        ['bath_scrub_left_leg'] = 'Strofina gamba sinistra',
+        ['bath_scrub_right_leg'] = 'Strofina gamba destra',
+        -- Pole
+        ['sword'] = 'Danza della spada',
+        ['cancan'] = 'Cancan',
+        ['fire'] = 'Danza del fuoco',
+        ['snake'] = 'Danza del serpente',
+    },
     ['de'] = {
         -- Prompt
         ['prompt_interact'] = 'Setzen~o~/~q~Aufstehen',
