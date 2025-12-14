@@ -3,12 +3,21 @@ Translation = {}
 Translation = {
     ['en'] = {
         -- Prompt
-        ['prompt_interact'] = 'Sit~o~/~q~Stand Up',
+        ['prompt_interact'] = 'Interact',
+        ['prompt_stand_up'] = 'Stand Up',
         ['prompt_group'] = 'Interactions',
         -- Menu
         ['menu_title'] = 'Interactions',
         ['menu_subtitle'] = 'Interact with the environment...',
         ['menu_cancel'] = 'Cancel Interaction',
+        ['menu_select_position'] = 'Select Position',
+        ['menu_select_position_subtitle'] = 'Choose a position...',
+        ['menu_select_category'] = 'Select Category',
+        ['menu_select_category_subtitle'] = 'Choose a category...',
+        ['menu_position_left'] = 'Left',
+        ['menu_position_right'] = 'Right',
+        ['menu_position_middle'] = 'Middle',
+        ['menu_position_up'] = 'Up',
         ['menu_right'] = ' - Right',
         ['menu_left'] = ' - Left',
         ['menu_middle'] = ' - Middle',
@@ -67,12 +76,21 @@ Translation = {
     },
     ['de'] = {
         -- Prompt
-        ['prompt_interact'] = 'Setzen~o~/~q~Aufstehen',
+        ['prompt_interact'] = 'Interagieren',
+        ['prompt_stand_up'] = 'Aufstehen',
         ['prompt_group'] = 'Interaktionen',
         -- Menu
         ['menu_title'] = 'Interaktionen',
         ['menu_subtitle'] = 'Interagiere mit der Umgebung...',
         ['menu_cancel'] = 'Interaktion abbrechen',
+        ['menu_select_position'] = 'Position auswählen',
+        ['menu_select_position_subtitle'] = 'Wähle eine Position aus...',
+        ['menu_select_category'] = 'Kategorie auswählen',
+        ['menu_select_category_subtitle'] = 'Wähle eine Kategorie aus...',
+        ['menu_position_left'] = 'Links',
+        ['menu_position_right'] = 'Rechts',
+        ['menu_position_middle'] = 'Mitte',
+        ['menu_position_up'] = 'Oben',
         ['menu_right'] = ' - Rechts',
         ['menu_left'] = ' - Links',
         ['menu_middle'] = ' - Mitte',

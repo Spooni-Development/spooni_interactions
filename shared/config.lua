@@ -2,9 +2,14 @@ Config = {}
 
 Config.DevMode = true -- true or false
 Config.Locale = 'en' -- en, de
+Config.MenuEnableCursor = true -- enable VORP menu cursor
 
-Config.Key = 0x8AAA0AD4 -- [LALT]
+Config.TeleportBackOnStop = true -- teleport player back to starting position when stopping interaction
+Config.DetectionInterval = 500 -- detection interval in ms (lower = faster, higher = better performance)
 
+Config.Keys = { interact = `INPUT_INTERACT_OPTION1`, standUp = `INPUT_QUIT` } -- G, Back Space
+
+-- Optional interaction effects
 Config.Effects = {
     ['clean'] = function()
         local ped = PlayerPedId()
@@ -14,11 +19,62 @@ Config.Effects = {
     end
 }
 
+-- Areas where prompts/menus are disabled
 Config.BannedAreas = {
-    {x = -306.482, y = 809.1139, z = 118.98, r = 5}, -- r = radius
+    {
+        coords = vector3(-306.482, 809.1139, 118.98),
+        radius = 5,
+    },
 }
 
-Config.Interactions = { -- List of interactable types of objects.
+-- Interaction categories for menu organization
+Config.Categories = {
+    sitting = {
+        label = 'Sitting',
+        scenarios = {
+            'GENERIC_SEAT_BENCH_SCENARIO',
+            'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR',
+            'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE',
+            'PROP_HUMAN_SEAT_CHAIR',
+            'PROP_HUMAN_SEAT_CHAIR_PORCH',
+            'PROP_HUMAN_SEAT_CHAIR_READING',
+            'PROP_CAMP_FIRE_SEAT_CHAIR',
+        }
+    },
+    drinking_smoking = {
+        label = 'Drinking / Smoking',
+        scenarios = {
+            'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_DRINKING',
+            'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING',
+            'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_SMOKING',
+            'PROP_HUMAN_SEAT_CHAIR_LANGTON', -- cigar pose
+            'PROP_HUMAN_SEAT_CHAIR_SMOKE_ROLL',
+        }
+    },
+    instruments = {
+        label = 'Instruments',
+        scenarios = {
+            'PROP_HUMAN_SEAT_CHAIR_BANJO',
+            'PROP_HUMAN_SEAT_BENCH_CONCERTINA',
+            'PROP_HUMAN_SEAT_CHAIR_GUITAR',
+            'PROP_HUMAN_SEAT_BENCH_HARMONICA',
+            'PROP_HUMAN_SEAT_BENCH_JAW_HARP',
+            'PROP_HUMAN_SEAT_BENCH_MANDOLIN',
+            'PROP_HUMAN_PIANO',
+            'PROP_HUMAN_PIANO_UPPERCLASS',
+            'PROP_HUMAN_PIANO_RIVERBOAT',
+            'PROP_HUMAN_PIANO_SKETCHY',
+            'PROP_HUMAN_ABIGAIL_PIANO',
+        }
+    },
+    other = {
+        label = 'Other',
+        scenarios = {}
+    }
+}
+
+-- List of interactable objects
+Config.Interactions = {
     -- Pianos
     {
         isCompatible = IsPedHumanMale,
@@ -482,8 +538,8 @@ Config.Interactions = { -- List of interactable types of objects.
         heading = 270.0
     },
 
-    ---- Custom
-    -- St. Denis Chruch Chair
+    -- Custom objects
+    -- St. Denis Church Chair
     {
         isCompatible = IsPedAdult,
         objects = {'sdchurchchair'},
@@ -494,7 +550,7 @@ Config.Interactions = { -- List of interactable types of objects.
         z = -0.1,
         heading = 180.0
     },
-    -- St. Denis Chruch Bench
+    -- St. Denis Church Bench
     {
         isCompatible = IsPedHumanMale,
         objects = {'sdchurchbench'},
@@ -539,7 +595,7 @@ Config.Interactions = { -- List of interactable types of objects.
         z = -0.375,
         heading = 180.0
     },
-    -- St. Denis Chruch Organ
+    -- St. Denis Church Organ
     {
         isCompatible = IsPedHumanMale,
         objects = {'pipeorgan'},

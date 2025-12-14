@@ -1,5 +1,5 @@
 # 🪑 Interactions
-Documentation relating to the [spooni_interactions](https://github.com/Spooni-Development/spooni_interactions).
+Documentation relating to the spooni_interactions.
 
 ## 1. Installation
 spooni_interactions works Standalone. 
@@ -18,15 +18,896 @@ To install spooni_interactions:
 - Now you can configure and translate the script as you like
   - `config.lua`
   - `translation.lua`
-- At the end
-  - Restart the server
+- At the end, restart the server
 
 If you have any problems, you can always open a ticket in the [Spooni Discord](https://discord.gg/spooni).
 
 ## 2. Usage
-Go to a prop in the list and interact with the prompt to open the menu, where you can then select scenarios.
+Adds simple, performance-friendly interactions for world props and locations. Walk near interactable objects like chairs, benches, beds, pianos, or bathing locations until a prompt appears, then press `G` to open the interaction menu and select an action. Press `Backspace` to stop the interaction
 
-## 3. Credits
+## 3. For Developer
+```lua
+Config = {}
+
+Config.DevMode = true -- true or false
+Config.Locale = 'en' -- en, de
+Config.MenuEnableCursor = true -- enable VORP menu cursor
+
+Config.TeleportBackOnStop = true -- teleport player back to starting position when stopping interaction
+Config.DetectionInterval = 500 -- detection interval in ms (lower = faster, higher = better performance)
+
+Config.Keys = { interact = `INPUT_INTERACT_OPTION1`, standUp = `INPUT_QUIT` } -- G, Back Space
+
+-- Optional interaction effects
+Config.Effects = {
+    ['clean'] = function()
+        local ped = PlayerPedId()
+        ClearPedEnvDirt(ped)
+        ClearPedDamageDecalByZone(ped, 10, 'ALL')
+        ClearPedBloodDamage(ped)
+    end
+}
+
+-- Areas where prompts/menus are disabled
+Config.BannedAreas = {
+    {
+        coords = vector3(-306.482, 809.1139, 118.98),
+        radius = 5,
+    },
+}
+
+-- Interaction categories for menu organization
+Config.Categories = {
+    sitting = {
+        label = 'Sitting',
+        scenarios = {
+            'GENERIC_SEAT_BENCH_SCENARIO',
+            'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR',
+            'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE',
+            'PROP_HUMAN_SEAT_CHAIR',
+            'PROP_HUMAN_SEAT_CHAIR_PORCH',
+            'PROP_HUMAN_SEAT_CHAIR_READING',
+            'PROP_CAMP_FIRE_SEAT_CHAIR',
+        }
+    },
+    drinking_smoking = {
+        label = 'Drinking / Smoking',
+        scenarios = {
+            'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_DRINKING',
+            'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING',
+            'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_SMOKING',
+            'PROP_HUMAN_SEAT_CHAIR_LANGTON', -- cigar pose
+            'PROP_HUMAN_SEAT_CHAIR_SMOKE_ROLL',
+        }
+    },
+    instruments = {
+        label = 'Instruments',
+        scenarios = {
+            'PROP_HUMAN_SEAT_CHAIR_BANJO',
+            'PROP_HUMAN_SEAT_BENCH_CONCERTINA',
+            'PROP_HUMAN_SEAT_CHAIR_GUITAR',
+            'PROP_HUMAN_SEAT_BENCH_HARMONICA',
+            'PROP_HUMAN_SEAT_BENCH_JAW_HARP',
+            'PROP_HUMAN_SEAT_BENCH_MANDOLIN',
+            'PROP_HUMAN_PIANO',
+            'PROP_HUMAN_PIANO_UPPERCLASS',
+            'PROP_HUMAN_PIANO_RIVERBOAT',
+            'PROP_HUMAN_PIANO_SKETCHY',
+            'PROP_HUMAN_ABIGAIL_PIANO',
+        }
+    },
+    other = {
+        label = 'Other',
+        scenarios = {}
+    }
+}
+
+-- List of interactable objects
+Config.Interactions = {
+    -- Pianos
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_piano03x'},
+        radius = 2.0,
+        scenarios = PianoScenarios,
+        x = 0.0,
+        y = -0.70,
+        z = 0.5,
+        heading = 0.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_piano02x'},
+        radius = 2.0,
+        scenarios = PianoScenarios,
+        x = 0.0,
+        y = -0.70,
+        z = 0.5,
+        heading = 0.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_nbxpiano01x'},
+        radius = 2.0,
+        scenarios = PianoScenarios,
+        x = -0.1,
+        y = -0.75,
+        z = 0.5,
+        heading = 0.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_nbmpiano01x'},
+        radius = 2.0,
+        scenarios = PianoScenarios,
+        x = 0.0,
+        y = -0.77,
+        z = 0.5,
+        heading = 0.0
+    },
+    {
+        objects = {'sha_man_piano01'},
+        radius = 2.0,
+        scenarios = PianoScenarios,
+        x = 0.0,
+        y = -0.75,
+        z = 0.5,
+        heading = 0.0
+    },
+    {
+        isCompatible = IsPedAdult,
+        objects = GenericChairs,
+        radius = 1.5,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdult,
+        objects = {'p_chairrusticsav01x'},
+        radius = 1.5,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = -0.1,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_bench11x'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.5,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_bench11x'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.5,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {'p_bench11x'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.5,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {'p_bench11x'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.5,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdult,
+        objects = {'p_chairtall01x'},
+        radius = 1.5,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = 0.8,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_barstool01x'},
+        radius = 1.5,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = 0.8,
+        heading = 0.0
+    },
+    {
+        isCompatible = IsPedChild,
+        objects = GenericChairs,
+        radius = 1.5,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = 0.4,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanFemale,
+        objects = GenericBenches,
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.5,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanFemale,
+        objects = GenericBenches,
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.5,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = GenericBenches,
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.5,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = GenericBenches,
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.5,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {'p_benchlong05x'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 1.2,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {'p_benchlong05x'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.6,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {'p_benchlong05x'},
+        label = 'middle',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.3,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {'p_chairconvoround01x'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.7,
+        y = -0.7,
+        z = 0.45,
+        heading = 132
+    },
+    {
+        objects = {'p_chairconvoround01x'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.7,
+        y = -0.6,
+        z = 0.45,
+        heading = 225
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {
+            'p_bench17x',
+            'p_benchbear01x'
+        },
+        label = 'right',
+        radius = 1.5,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.3,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_bench17x',
+            'p_benchbear01x'
+        },
+        label = 'left',
+        radius = 1.5,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.3,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_bed14x',
+            'p_bed17x',
+            'p_bed21x',
+            'p_bedbunk03x',
+            'p_bedindian02x',
+            'p_cot01x'
+        },
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {'p_bedbunk03x'},
+        label = 'up',
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = 1.68,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_bed20madex',
+            'p_cs_pro_bed_unmade',
+            'p_cs_bed20madex'
+        },
+        label = 'right',
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = -0.3,
+        y = -0.2,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_bed20madex',
+            'p_cs_pro_bed_unmade',
+            'p_cs_bed20madex'
+        },
+        label = 'left',
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.3,
+        y = -0.2,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_ambbed01x',
+            'p_bed03x',
+            'p_bed09x',
+            'p_bedindian01x'
+        },
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = 0.5,
+        heading = 270.0
+    },
+    {
+        objects = {
+            'p_bed05x'
+        },
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.0,
+        y = -0.5,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_bed10x',
+            'p_bed12x',
+            'p_bed13x',
+            'p_bed22x'
+        },
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.0,
+        y = -0.3,
+        z = 0.8,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_bed20x'
+        },
+        label = 'right',
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = -0.3,
+        y = -0.2,
+        z = 0.8,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_bed20x'
+        },
+        label = 'left',
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.3,
+        y = -0.2,
+        z = 0.8,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_bedking02x'
+        },
+        label = 'left',
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = -0.5,
+        y = 0.5,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_bedking02x'
+        },
+        label = 'right',
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.5,
+        y = 0.5,
+        z = 0.5,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_bedrollopen01x',
+            'p_bedrollopen03x',
+            'p_re_bedrollopen01x',
+            's_bedrollfurlined01x',
+            's_bedrollopen01x',
+            'p_amb_mattress04x',
+            'p_mattress04x',
+            'p_mattress07x',
+            'p_mattresscombined01x'
+        },
+        radius = 1.5,
+        scenarios = BedScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = 0.0,
+        heading = 180.0
+    },
+    {
+        objects = {
+            'p_cs_ann_wrkr_bed01x',
+            'p_cs_roc_hse_bed',
+            'p_medbed01x'
+        },
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.1,
+        y = 0.0,
+        z = 0.85,
+        heading = 270.0
+    },
+    {
+        objects = {
+            'p_cs_bedsleptinbed08x'
+        },
+        label = 'left',
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.3,
+        y = -0.3,
+        z = 0.5,
+        heading = 270.0
+    },
+    {
+        objects = {
+            'p_cs_bedsleptinbed08x'
+        },
+        label = 'right',
+        radius = 2.0,
+        scenarios = BedScenarios,
+        x = 0.3,
+        y = 0.3,
+        z = 0.5,
+        heading = 270.0
+    },
+
+    -- Custom objects
+    -- St. Denis Church Chair
+    {
+        isCompatible = IsPedAdult,
+        objects = {'sdchurchchair'},
+        radius = 1.5,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = -0.1,
+        z = -0.1,
+        heading = 180.0
+    },
+    -- St. Denis Church Bench
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'sdchurchbench'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.5,
+        y = -0.3,
+        z = -0.375,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'sdchurchbench'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.5,
+        y = -0.3,
+        z = -0.375,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {'sdchurchbench'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.5,
+        y = -0.3,
+        z = -0.375,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {'sdchurchbench'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.5,
+        y = -0.3,
+        z = -0.375,
+        heading = 180.0
+    },
+    -- St. Denis Church Organ
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'pipeorgan'},
+        radius = 2.0,
+        scenarios = PianoScenarios,
+        x = 0.0,
+        y = -0.70,
+        z = -0.65,
+        heading = 0.0
+    },
+    {
+        isCompatible = IsPedHumanFemale,
+        objects = {'pipeorgan'},
+        radius = 2.0,
+        scenarios = PianoScenarios,
+        x = 0.0,
+        y = -0.70,
+        z = -0.625,
+        heading = 0.0
+    },
+    -- Shoe stand
+    {
+        isCompatible = IsPedHumanFemale,
+        objects = {'p_shoeshinestand01x'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.45,
+        y = 0.25,
+        z = 1.2,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanFemale,
+        objects = {'p_shoeshinestand01x'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.45,
+        y = 0.25,
+        z = 1.2,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_shoeshinestand01x'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -0.45,
+        y = 0.25,
+        z = 1.2,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_shoeshinestand01x'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.45,
+        y = 0.25,
+        z = 1.2,
+        heading = 180.0
+    },
+    -- Valentine Church Bench
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'churchbench1'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -1.5,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'churchbench1'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {'churchbench1'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = -1.5,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {'churchbench1'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'churchbench2'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'churchbench2'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 1.5,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {'churchbench2'},
+        label = 'left',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdultFemale,
+        objects = {'churchbench2'},
+        label = 'right',
+        radius = 2.0,
+        scenarios = GenericChairAndBenchScenarios,
+        x = 1.5,
+        y = 0.0,
+        z = -0.3,
+        heading = 180.0
+    },
+    -- Pole Prop
+    {
+        objects = {'pole'},
+        radius = 1.5,
+        animations = DancingAnimations,
+        x = 0.0,
+        y = 0.5,
+        z = 1.0,
+        heading = 180.0,
+    },
+
+    ---- Bath
+    -- Valentine bath
+    {
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = -317.01651,
+        y = 761.86,
+        z = 117.45099,
+        heading = 100.278,
+        effect = 'clean'
+    },
+    -- Saint Denis bath
+    {
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = 2629.4099,
+        y = -1223.7757,
+        z = 59.6699,
+        heading = 2.896,
+        effect = 'clean'
+    },
+    -- Strawberry bath
+    {
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = -1812.46838,
+        y = -373.23529,
+        z = 166.64999,
+        heading = 92.105,
+        effect = 'clean'
+    },
+    -- Annesburg bath
+    {
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = 2952.804199,
+        y = 1335.031494,
+        z = 44.496986,
+        heading = 154.996,
+        effect = 'clean'
+    },
+    -- Bronte Mansion bath
+    {
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = 2365.649,
+        y = -1211.780,
+        z = 51.888,
+        heading = 3.0,
+        effect = 'clean'
+    },
+    -- Rhodes bath
+    {
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = 1336.350,
+        y = -1377.972,
+        z = 84.345,
+        heading = -96.693,
+        effect = 'clean'
+    },
+    -- Tumbleweed bath
+    {
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = -5513.196,
+        y = -2972.139,
+        z = -0.75,
+        heading = 108.131,
+        effect = 'clean'
+    },
+    -- Van Horn bath
+    {
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = 2987.698,
+        y = 573.760,
+        z = 47.920,
+        heading = 171.942,
+        effect = 'clean'
+    },
+    -- Blackwater bath
+    {
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = -823.362,
+        y = -1318.832,
+        z = 43.679,
+        heading = 92.793,
+        effect = 'clean'
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_bath03x'},
+        radius = 2.0,
+        animations = BathingAnimations,
+        x = -0.5,
+        y = 0.0,
+        z = 0.65,
+        heading = 270.0,
+        effect = 'clean'
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = {'p_bath02x'},
+        radius = 1.5,
+        animations = BathingAnimations,
+        x = 0.0,
+        y = 0.5,
+        z = 1.0,
+        heading = 180.0,
+        effect = 'clean'
+    },
+}
+
+```
+
+## 4. Credits
 
 Big thanks go to [kibook](https://github.com/kibook) the creator of the main script, since the script is already 3 years old (as of 2024) we wanted to give it a little overhaul.
 

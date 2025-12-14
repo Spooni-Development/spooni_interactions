@@ -5,15 +5,21 @@ lua54 'yes'
 
 author 'Spooni'
 description 'Interaction Script'
-version '8'
+version '9'
 
 server_scripts {
 	'server/*.lua',
 }
 
 client_scripts {
-	'client/*.lua',
-	'shared/*.lua'
+	'shared/translation.lua',
+	'client/cl_common.lua',
+	'shared/config.lua',
+	'client/cl_prompt.lua',
+	'client/cl_detection.lua',
+	'client/cl_menu.lua',
+	'client/cl_interaction.lua',
+	'client/cl_main.lua',
 }
 
 shared_scripts {

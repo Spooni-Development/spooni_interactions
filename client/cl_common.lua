@@ -1,3 +1,4 @@
+-- Ped compatibility functions
 function IsPedChild(ped)
     return Citizen.InvokeNative(0x137772000DAF42C5, ped)
 end
@@ -22,6 +23,7 @@ function IsPedAdultFemale(ped)
     return not IsPedChild(ped) and not IsPedMale(ped)
 end
 
+-- Generic object lists
 GenericChairs = {
     'mp005_s_posse_col_chair01x',
     'mp005_s_posse_foldingchair_01x',
@@ -197,6 +199,7 @@ GenericBenches = {
     's_bench01x',
 }
 
+-- Scenario Definitions
 GenericChairAndBenchScenarios = {
     {
         name = 'GENERIC_SEAT_BENCH_SCENARIO',
@@ -374,6 +377,7 @@ PianoScenarios = {
     }
 }
 
+-- Animation Definitions
 BathingAnimations = {
     {
         label = Translation[Config.Locale]['bath'],
@@ -402,7 +406,6 @@ BathingAnimations = {
     }
 }
 
-
 DancingAnimations = {
     {
         label = Translation[Config.Locale]['sword'],
@@ -425,3 +428,5 @@ DancingAnimations = {
         name = 'dance_dancer'
     },
 }
+
+
