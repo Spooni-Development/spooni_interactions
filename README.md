@@ -23,7 +23,7 @@ To install spooni_interactions:
 If you have any problems, you can always open a ticket in the [Spooni Discord](https://discord.gg/spooni).
 
 ## 2. Usage
-Adds simple, performance-friendly interactions for world props and locations. Walk near interactable objects like chairs, benches, beds, pianos, or bathing locations until a prompt appears, then press `G` to open the interaction menu and select an action. Press `Backspace` to stop the interaction
+Adds simple, performance-friendly interactions for world props and locations. Walk near interactable objects like chairs, benches, beds, pianos, or bathing locations until a prompt appears, then press `ALT` to open the interaction menu and select an action. Press `Backspace` to stop the interaction.
 
 ## 3. For Developer
 ```lua
@@ -36,7 +36,7 @@ Config.MenuEnableCursor = true -- enable VORP menu cursor
 Config.TeleportBackOnStop = true -- teleport player back to starting position when stopping interaction
 Config.DetectionInterval = 500 -- detection interval in ms (lower = faster, higher = better performance)
 
-Config.Keys = { interact = `INPUT_INTERACT_OPTION1`, standUp = `INPUT_QUIT` } -- G, Back Space
+Config.Keys = { interact = `INPUT_PC_FREE_LOOK`, standUp = `INPUT_QUIT` } -- ALT, Back Space
 
 -- Optional interaction effects
 Config.Effects = {

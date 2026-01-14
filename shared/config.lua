@@ -7,7 +7,7 @@ Config.MenuEnableCursor = true -- enable VORP menu cursor
 Config.TeleportBackOnStop = true -- teleport player back to starting position when stopping interaction
 Config.DetectionInterval = 500 -- detection interval in ms (lower = faster, higher = better performance)
 
-Config.Keys = { interact = `INPUT_INTERACT_OPTION1`, standUp = `INPUT_QUIT` } -- G, Back Space
+Config.Keys = { interact = `INPUT_PC_FREE_LOOK`, standUp = `INPUT_QUIT` } -- ALT, Back Space
 
 -- Optional interaction effects
 Config.Effects = {
