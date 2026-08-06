@@ -38,33 +38,33 @@ local function StartInteractionAtCoords(interaction)
         Debug('Error: interaction is nil in StartInteractionAtCoords')
         return
     end
-    
+
     local ped = PlayerPedId()
     local x, y, z, h = interaction.x, interaction.y, interaction.z, interaction.heading
-    
+
     -- Save starting position for restoration
     if not StartingCoords then
         StartingCoords = GetEntityCoords(ped)
     end
-    
-    -- Instantly move to target like before (no walking), then start
-    SetEntityCoordsNoOffset(ped, x, y, z, false, false, false)
-    if h then SetEntityHeading(ped, h) end
-    
-    -- Execute scenario or animation
+
+    ClearPedTasksImmediately(ped)
+    FreezeEntityPosition(ped, true)
+
+    -- Execute scenario or animation. The scenario native anchors the ped itself,
+    -- so it must not be teleported beforehand or it ends up floating.
     if interaction.scenario then
         TaskStartScenarioAtPosition(ped, GetHashKey(interaction.scenario), x, y, z, h, -1, false, true)
     elseif interaction.animation then
         SetEntityCoordsNoOffset(ped, x, y, z, false, false, false)
-        SetEntityHeading(ped, h)
+        if h then SetEntityHeading(ped, h) end
         PlayAnimation(ped, interaction.animation)
     end
-    
+
     -- Apply effect if defined
     if interaction.effect and Config.Effects[interaction.effect] then
         Config.Effects[interaction.effect]()
     end
-    
+
     CurrentInteraction = interaction
 end
 
@@ -114,23 +114,26 @@ end
 -- Stop current interaction and restore player state
 function InteractionManager.StopInteraction()
     local ped = PlayerPedId()
-    
+
     CurrentInteraction = nil
-    
-    -- Clear tasks based on teleport setting
-    if Config.TeleportBackOnStop and StartingCoords then
-        -- Immediate clear and teleport back
+
+    if Config.TeleportBackOnStop then
         ClearPedTasksImmediately(ped)
-        ClearPedSecondaryTask(ped)
-        SetEntityCoordsNoOffset(ped, StartingCoords.x, StartingCoords.y, StartingCoords.z, false, false, false)
     else
-        -- Clear with stand-up animation, stay at interaction spot
         ClearPedTasks(ped)
-        ClearPedSecondaryTask(ped)
     end
-    
+    ClearPedSecondaryTask(ped)
+    FreezeEntityPosition(ped, false)
+
+    if Config.TeleportBackOnStop and StartingCoords then
+        local coords = StartingCoords
+        Wait(100)
+        SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false)
+    end
+
     StartingCoords = nil
 end
+
 -- Check if currently interacting
 function InteractionManager.IsInteracting()
     return CurrentInteraction ~= nil

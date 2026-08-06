@@ -28,7 +28,9 @@ GenericChairs = {
     'mp005_s_posse_col_chair01x',
     'mp005_s_posse_foldingchair_01x',
     'mp005_s_posse_trad_chair01x',
-    'o_stoolfoldingstatic01x',
+    'mp007_p_mp_chairdesk01x',
+    'mp007_p_nat_chairfolding02x',
+    's_stoolfoldingstatic01x',
     'p_ambchair01x',
     'p_ambchair02x',
     'p_armchair01x',
@@ -39,7 +41,7 @@ GenericChairs = {
     'p_chair06x',
     'p_chair07x',
     'p_chair09x',
-    'p_chair10x',
+    'p_chair_10x',
     'p_chair11x',
     'p_chair12bx',
     'p_chair12x',
@@ -119,6 +121,8 @@ GenericChairs = {
     'p_diningchairs01x',
     'p_gen_chair07x',
     'p_oldarmchair01x',
+    'p_benchpiano02x',
+    'p_pianochair01x',
     'p_privatelounge_chair01x',
     'p_rockingchair01x',
     'p_rockingchair02x',
@@ -134,6 +138,7 @@ GenericChairs = {
     'p_stool03x',
     'p_stool04x',
     'p_stool05x',
+    'p_stool06x',
     'p_stool07x',
     'p_stool08x',
     'p_stool09x',
@@ -147,6 +152,12 @@ GenericChairs = {
     'p_stoolfolding01x',
     'p_stoolwinter01x',
     'p_theaterchair01b01x',
+    'p_chamberpot01x',
+    'p_commode01x',
+    'p_commode02x',
+    'p_toilet_01',
+    'p_toiletchair01x',
+    'toilette1',
     'p_windsorchair01x',
     'p_windsorchair02x',
     'p_windsorchair03x',
@@ -155,6 +166,8 @@ GenericChairs = {
 }
 
 GenericBenches = {
+    'p_benchannsaloon01x',
+    'p_victoriansofa01x',
     'p_bench03x',
     'p_bench06x',
     'p_bench08bx',
@@ -203,149 +216,347 @@ GenericBenches = {
 GenericChairAndBenchScenarios = {
     {
         name = 'GENERIC_SEAT_BENCH_SCENARIO',
-        label = Translation[Config.Locale]['generic_seat_bench_scenario']
+        label = L('generic_seat_bench_scenario')
+    },
+    {
+        name = 'GENERIC_SEAT_CHAIR_SCENARIO',
+        isCompatible = IsPedHumanMale,
+        label = L('generic_seat_chair_scenario')
+    },
+    {
+        name = 'GENERIC_SEAT_CHAIR_TABLE_SCENARIO',
+        label = L('generic_seat_chair_table_scenario')
     },
     {
         name = 'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_DRINKING',
-        label = Translation[Config.Locale]['mp_lobby_prop_human_seat_bench_porch_drinking']
+        label = L('mp_lobby_prop_human_seat_bench_porch_drinking')
     },
     {
         name = 'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_SMOKING',
-        label = Translation[Config.Locale]['mp_lobby_prop_human_seat_bench_porch_smoking']
+        label = L('mp_lobby_prop_human_seat_bench_porch_smoking')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_LANGTON',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['PROP_HUMAN_SEAT_CHAIR_LANGTON']
+        label = L('PROP_HUMAN_SEAT_CHAIR_LANGTON')
     },
     {
         name = 'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR',
-        label = Translation[Config.Locale]['mp_lobby_prop_human_seat_chair']
+        label = L('mp_lobby_prop_human_seat_chair')
     },
     {
         name = 'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE',
-        label = Translation[Config.Locale]['mp_lobby_prop_human_seat_chair_whittle']
+        label = L('mp_lobby_prop_human_seat_chair_whittle')
     },
     {
         name = 'PROP_CAMP_FIRE_SEAT_CHAIR',
-        label = Translation[Config.Locale]['prop_camp_fire_seat_chair']
+        label = L('prop_camp_fire_seat_chair')
+    },
+    {
+        name = 'PROP_HUMAN_CAMP_FIRE_SEAT_BOX',
+        label = L('prop_human_camp_fire_seat_box')
     },
     {
         name = 'PROP_HUMAN_SEAT_BENCH_CONCERTINA',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_seat_bench_concertina']
+        label = L('prop_human_seat_bench_concertina')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_FAN',
         isCompatible = IsPedHumanFemale,
-        label = Translation[Config.Locale]['prop_human_seat_chair_fan']
+        label = L('prop_human_seat_chair_fan')
     },
     {
         name = 'PROP_HUMAN_SEAT_BENCH_JAW_HARP',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_seat_bench_jaw_harp']
+        label = L('prop_human_seat_bench_jaw_harp')
     },
     {
         name = 'PROP_HUMAN_SEAT_BENCH_MANDOLIN',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_seat_bench_mandolin']
+        label = L('prop_human_seat_bench_mandolin')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_BENCH_FIDDLE',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_human_seat_bench_fiddle')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR',
-        label = Translation[Config.Locale]['prop_human_seat_chair']
+        label = L('prop_human_seat_chair')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_BANJO',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_seat_chair_banjo']
+        label = L('prop_human_seat_chair_banjo')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_CIGAR',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_seat_chair_cigar']
+        label = L('prop_human_seat_chair_cigar')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_GROOMING_GROSS',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_seat_chair_grooming_gross']
+        label = L('prop_human_seat_chair_grooming_gross')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_GROOMING_POSH',
         isCompatible = IsPedHumanFemale,
-        label = Translation[Config.Locale]['prop_human_seat_chair_grooming_posh']
+        label = L('prop_human_seat_chair_grooming_posh')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_GUITAR',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_seat_chair_guitar']
+        label = L('prop_human_seat_chair_guitar')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_seat_chair_knife_badass']
+        label = L('prop_human_seat_chair_knife_badass')
+    },
+    {
+        name = 'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS',
+        label = L('mp_lobby_prop_human_seat_chair_knife_badass')
+    },
+    {
+        name = 'WORLD_CAMP_JAVIER_KNIFE',
+        isCompatible = IsPedHumanMale,
+        label = L('world_camp_javier_knife')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_KNITTING',
         isCompatible = IsPedHumanFemale,
-        label = Translation[Config.Locale]['prop_human_seat_chair_knitting']
+        label = L('prop_human_seat_chair_knitting')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_PORCH',
-        label = Translation[Config.Locale]['prop_human_seat_chair_porch']
+        label = L('prop_human_seat_chair_porch')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_READING',
-        isCompatible = IsPedHumanFemale,
-        label = Translation[Config.Locale]['prop_human_seat_chair_reading']
+        label = L('prop_human_seat_chair_reading')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING',
-        label = Translation[Config.Locale]['prop_human_seat_chair_table_drinking']
+        label = L('prop_human_seat_chair_table_drinking')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_DRINKING_MOONSHINE',
+        label = L('prop_human_seat_chair_drinking_moonshine')
     },
     {
         name = 'PROP_HUMAN_SEAT_BENCH_HARMONICA',
-        label = Translation[Config.Locale]['prop_human_seat_bench_harmonica']
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_bench_harmonica')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_SMOKE_ROLL',
-        label = Translation[Config.Locale]['prop_human_seat_chair_smoke_roll']
+        label = L('prop_human_seat_chair_smoke_roll')
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_FISHING_ROD',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_seat_chair_fishing_rod']
+        label = L('prop_human_seat_chair_fishing_rod')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_CRAB_TRAP',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_chair_crab_trap')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_CLEAN_SADDLE',
+        label = L('prop_human_seat_chair_clean_saddle')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CRATE_CLEAN_BOOTS',
+        label = L('prop_human_seat_crate_clean_boots')
+    },
+    {
+        name = 'PROP_CAMP_JAVIER_SEAT_CRATE_BRUSH_HAT',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_camp_javier_seat_crate_brush_hat')
+    },
+    {
+        name = 'PROP_CAMP_CHARLES_SEAT_CHAIR_ARROW_FLETCH',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_camp_charles_seat_chair_arrow_fletch')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_MORTAR_PESTLE',
+        label = L('prop_human_seat_chair_mortar_pestle')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_CLEAN_RIFLE',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_chair_clean_rifle')
+    },
+    {
+        name = 'PROP_CAMP_MICAH_SEAT_CHAIR_CLEAN_GUN',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_camp_micah_seat_chair_clean_gun')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_BENCH_BACK',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_bench_back')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_BENCH_TIRED',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_bench_tired')
+    },
+    {
+        name = 'PROP_HUMAN_PASSED_OUT_TABLE',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_passed_out_table')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_A',
+        label = L('mp_lobby_seated_a')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_B',
+        label = L('mp_lobby_seated_b')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_C',
+        label = L('mp_lobby_seated_c')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_D',
+        label = L('mp_lobby_seated_d')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_E',
+        label = L('mp_lobby_seated_e')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_F',
+        label = L('mp_lobby_seated_f')
+    },
+    {
+        name = 'PROP_CAMP_FIRE_SEATED',
+        label = L('prop_camp_fire_seated')
+    },
+    {
+        name = 'PROP_CAMP_FIRE_SEAT_BENCH',
+        label = L('prop_camp_fire_seat_bench')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_NO_BACK_COLLECTION',
+        label = L('prop_human_seat_no_back_collection')
+    },
+    {
+        name = 'PROP_PLAYER_BARBER_SEAT',
+        label = L('prop_player_barber_seat')
+    },
+    {
+        name = 'MP_MOONSHINE_BAND_PROP_HUMAN_SEAT_CHAIR_BANJO',
+        isCompatible = IsPedHumanMale,
+        label = L('mp_moonshine_band_banjo')
+    },
+    {
+        name = 'MP_MOONSHINE_BAND_PROP_HUMAN_SEAT_CHAIR_WASHBOARD',
+        isCompatible = IsPedHumanMale,
+        label = L('mp_moonshine_band_washboard')
+    },
+    {
+        name = 'PROP_PLAYER_SEAT_CHAIR_DYNAMIC',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_player_seat_chair_dynamic')
+    },
+    {
+        name = 'PROP_PLAYER_DYNAMIC_SEAT_CHAIR_TABLE',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_player_dynamic_seat_chair_table')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_SMOKING',
+        label = L('prop_human_seat_chair_smoking')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_SKETCHING',
+        label = L('prop_human_seat_chair_sketching')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING_MOONSHINE',
+        label = L('prop_human_seat_chair_table_drinking_moonshine')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_BENCH',
+        label = L('prop_human_seat_bench')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_SAD',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_human_seat_chair_sad')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_SEWING',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_human_seat_chair_sewing')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_TABLE_FAN_WHORE',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_human_seat_chair_table_fan')
+    },
+    {
+        name = 'PROP_PLAYER_SEAT_CHAIR_GENERIC',
+        label = L('prop_player_seat_chair_generic')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_WHITTLE',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_chair_whittle')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_BLUES_GUITAR',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_chair_blues_guitar')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_CARVE_LURE',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_chair_carve_lure')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_BENCH_PORCH',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_bench_porch')
     },
 }
 
 BedScenarios = {
     {
         name = 'PROP_HUMAN_SLEEP_BED_PILLOW',
-        label = Translation[Config.Locale]['prop_human_sleep_bed_pillow']
+        label = L('prop_human_sleep_bed_pillow')
     },
     {
         name = 'PROP_HUMAN_SLEEP_BED_PILLOW_HIGH',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_sleep_bed_pillow_high']
+        label = L('prop_human_sleep_bed_pillow_high')
     },
     {
         name = 'WORLD_HUMAN_SLEEP_GROUND_ARM',
-        label = Translation[Config.Locale]['world_human_sleep_ground_arm']
+        label = L('world_human_sleep_ground_arm')
     },
     {
         name = 'WORLD_HUMAN_SLEEP_GROUND_PILLOW',
-        label = Translation[Config.Locale]['world_human_sleep_ground_pillow']
+        label = L('world_human_sleep_ground_pillow')
     },
     {
         name = 'WORLD_HUMAN_SIT_FALL_ASLEEP',
-        label = Translation[Config.Locale]['world_human_sit_fall_asleep']
+        label = L('world_human_sit_fall_asleep')
     },
     {
         name = 'WORLD_PLAYER_SLEEP_BEDROLL',
-        label = Translation[Config.Locale]['world_player_sleep_bedroll']
+        label = L('world_player_sleep_bedroll')
     },
     {
         name = 'WORLD_PLAYER_SLEEP_GROUND',
-        label = Translation[Config.Locale]['world_player_sleep_ground']
+        label = L('world_player_sleep_ground')
     }
 }
 
@@ -353,54 +564,73 @@ PianoScenarios = {
     {
         name = 'PROP_HUMAN_PIANO',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_piano']
+        label = L('prop_human_piano')
     },
     {
         name = 'PROP_HUMAN_PIANO_UPPERCLASS',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_piano_upperclass']
+        label = L('prop_human_piano_upperclass')
     },
     {
         name = 'PROP_HUMAN_PIANO_RIVERBOAT',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_piano_riverboat']
+        label = L('prop_human_piano_riverboat')
     },
     {
         name = 'PROP_HUMAN_PIANO_SKETCHY',
         isCompatible = IsPedHumanMale,
-        label = Translation[Config.Locale]['prop_human_piano_sketchy']
+        label = L('prop_human_piano_sketchy')
     },
     {
         name = 'PROP_HUMAN_ABIGAIL_PIANO',
         isCompatible = IsPedHumanFemale,
-        label = Translation[Config.Locale]['prop_human_abigail_piano']
+        label = L('prop_human_abigail_piano')
+    },
+    {
+        name = 'MP_MOONSHINE_BAND_WORLD_HUMAN_PIANO',
+        label = L('mp_moonshine_band_world_human_piano')
+    }
+}
+
+DrinkingScenarios = {
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_DRINKING',
+        label = L('prop_human_seat_chair_drinking')
+    }
+}
+
+WhiskeyScenarios = {
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING_WHISKEY_MOONSHINE',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_chair_table_drinking_whiskey_moonshine')
     }
 }
 
 -- Animation Definitions
 BathingAnimations = {
     {
-        label = Translation[Config.Locale]['bath'],
+        label = L('bath'),
         dict = 'mini_games@bathing@regular@arthur',
         name = 'bathing_idle_02'
     },
     {
-        label = Translation[Config.Locale]['bath_scrub_left_arm'],
+        label = L('bath_scrub_left_arm'),
         dict = 'mini_games@bathing@regular@arthur',
         name = 'left_arm_scrub_medium'
     },
     {
-        label = Translation[Config.Locale]['bath_scrub_right_arm'],
+        label = L('bath_scrub_right_arm'),
         dict = 'mini_games@bathing@regular@arthur',
         name = 'right_arm_scrub_medium'
     },
     {
-        label = Translation[Config.Locale]['bath_scrub_left_leg'],
+        label = L('bath_scrub_left_leg'),
         dict = 'mini_games@bathing@regular@arthur',
         name = 'left_leg_scrub_medium'
     },
     {
-        label = Translation[Config.Locale]['bath_scrub_right_leg'],
+        label = L('bath_scrub_right_leg'),
         dict = 'mini_games@bathing@regular@arthur',
         name = 'right_leg_scrub_medium'
     }
@@ -408,22 +638,22 @@ BathingAnimations = {
 
 DancingAnimations = {
     {
-        label = Translation[Config.Locale]['sword'],
+        label = L('sword'),
         dict = 'script_shows@sworddance@act3_p1',
         name = 'dancer_sworddance'
     },
     {
-        label = Translation[Config.Locale]['cancan'],
+        label = L('cancan'),
         dict = 'script_shows@cancandance@p2',
         name = 'cancandance_p2_fem1'
     },
     {
-        label = Translation[Config.Locale]['fire'],
+        label = L('fire'),
         dict = 'script_shows@firebreather@act2_p1',
         name = 'dancer_dance'
     },
     {
-        label = Translation[Config.Locale]['snake'],
+        label = L('snake'),
         dict = 'script_shows@snakedancer@act1_p1',
         name = 'dance_dancer'
     },
