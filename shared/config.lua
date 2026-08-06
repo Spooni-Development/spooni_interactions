@@ -1,8 +1,9 @@
 Config = {}
 
 Config.DevMode = true -- true or false
-Config.Locale = 'en' -- en, de
-Config.MenuEnableCursor = true -- enable VORP menu cursor
+Config.Locale = 'en' -- en, de, fr
+Config.MenuEnableCursor = false -- show the mouse cursor while the menu is open
+Config.MenuItemsOnScreen = 8 -- menu entries visible before scrolling (max 13)
 
 Config.TeleportBackOnStop = true -- teleport player back to starting position when stopping interaction
 Config.DetectionInterval = 500 -- detection interval in ms (lower = faster, higher = better performance)
@@ -28,31 +29,40 @@ Config.BannedAreas = {
 }
 
 -- Interaction categories for menu organization
+Config.CategoryOrder = { 'sitting', 'drinking_smoking', 'instruments', 'activities', 'resting', 'other' }
+
 Config.Categories = {
     sitting = {
-        label = 'Sitting',
+        labelKey = 'category_sitting',
         scenarios = {
             'GENERIC_SEAT_BENCH_SCENARIO',
+            'GENERIC_SEAT_CHAIR_SCENARIO',
+            'GENERIC_SEAT_CHAIR_TABLE_SCENARIO',
             'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR',
-            'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE',
             'PROP_HUMAN_SEAT_CHAIR',
             'PROP_HUMAN_SEAT_CHAIR_PORCH',
-            'PROP_HUMAN_SEAT_CHAIR_READING',
             'PROP_CAMP_FIRE_SEAT_CHAIR',
+            'PROP_HUMAN_CAMP_FIRE_SEAT_BOX',
+            'PROP_HUMAN_SEAT_CHAIR_FAN',
+            'PROP_HUMAN_SEAT_CHAIR_GROOMING_GROSS',
         }
     },
     drinking_smoking = {
-        label = 'Drinking / Smoking',
+        labelKey = 'category_drinking_smoking',
         scenarios = {
             'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_DRINKING',
             'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING',
+            'PROP_HUMAN_SEAT_CHAIR_DRINKING',
+            'PROP_HUMAN_SEAT_CHAIR_DRINKING_MOONSHINE',
+            'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING_WHISKEY_MOONSHINE',
             'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_SMOKING',
-            'PROP_HUMAN_SEAT_CHAIR_LANGTON', -- cigar pose
+            'PROP_HUMAN_SEAT_CHAIR_LANGTON',
+            'PROP_HUMAN_SEAT_CHAIR_CIGAR',
             'PROP_HUMAN_SEAT_CHAIR_SMOKE_ROLL',
         }
     },
     instruments = {
-        label = 'Instruments',
+        labelKey = 'category_instruments',
         scenarios = {
             'PROP_HUMAN_SEAT_CHAIR_BANJO',
             'PROP_HUMAN_SEAT_BENCH_CONCERTINA',
@@ -60,15 +70,53 @@ Config.Categories = {
             'PROP_HUMAN_SEAT_BENCH_HARMONICA',
             'PROP_HUMAN_SEAT_BENCH_JAW_HARP',
             'PROP_HUMAN_SEAT_BENCH_MANDOLIN',
+            'PROP_HUMAN_SEAT_BENCH_FIDDLE',
             'PROP_HUMAN_PIANO',
             'PROP_HUMAN_PIANO_UPPERCLASS',
             'PROP_HUMAN_PIANO_RIVERBOAT',
             'PROP_HUMAN_PIANO_SKETCHY',
             'PROP_HUMAN_ABIGAIL_PIANO',
+            'MP_MOONSHINE_BAND_WORLD_HUMAN_PIANO',
+        }
+    },
+    activities = {
+        labelKey = 'category_activities',
+        scenarios = {
+            'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE',
+            'PROP_HUMAN_SEAT_CHAIR_READING',
+            'PROP_HUMAN_SEAT_CHAIR_KNITTING',
+            'PROP_HUMAN_SEAT_CHAIR_GROOMING_POSH',
+            'PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS',
+            'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS',
+            'WORLD_CAMP_JAVIER_KNIFE',
+            'PROP_HUMAN_SEAT_CHAIR_FISHING_ROD',
+            'PROP_HUMAN_SEAT_CHAIR_CRAB_TRAP',
+            'PROP_HUMAN_SEAT_CHAIR_CLEAN_SADDLE',
+            'PROP_HUMAN_SEAT_CRATE_CLEAN_BOOTS',
+            'PROP_CAMP_JAVIER_SEAT_CRATE_BRUSH_HAT',
+            'PROP_CAMP_CHARLES_SEAT_CHAIR_ARROW_FLETCH',
+            'PROP_HUMAN_SEAT_CHAIR_MORTAR_PESTLE',
+            'PROP_HUMAN_SEAT_CHAIR_CLEAN_RIFLE',
+            'PROP_CAMP_MICAH_SEAT_CHAIR_CLEAN_GUN',
+        }
+    },
+    resting = {
+        labelKey = 'category_resting',
+        scenarios = {
+            'PROP_HUMAN_SEAT_BENCH_BACK',
+            'PROP_HUMAN_SEAT_BENCH_TIRED',
+            'PROP_HUMAN_PASSED_OUT_TABLE',
+            'PROP_HUMAN_SLEEP_BED_PILLOW',
+            'PROP_HUMAN_SLEEP_BED_PILLOW_HIGH',
+            'WORLD_HUMAN_SLEEP_GROUND_ARM',
+            'WORLD_HUMAN_SLEEP_GROUND_PILLOW',
+            'WORLD_HUMAN_SIT_FALL_ASLEEP',
+            'WORLD_PLAYER_SLEEP_BEDROLL',
+            'WORLD_PLAYER_SLEEP_GROUND',
         }
     },
     other = {
-        label = 'Other',
+        labelKey = 'category_other',
         scenarios = {}
     }
 }
@@ -133,6 +181,48 @@ Config.Interactions = {
         x = 0.0,
         y = 0.0,
         z = 0.5,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdult,
+        objects = GenericChairs,
+        radius = 1.5,
+        scenarios = DrinkingScenarios,
+        x = 0.0,
+        y = 0.05,
+        z = -0.1,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedHumanMale,
+        objects = GenericChairs,
+        radius = 1.5,
+        scenarios = WhiskeyScenarios,
+        x = 0.0,
+        y = 0.0,
+        z = 0.5,
+        heading = 155.0
+    },
+    {
+        isCompatible = IsPedAdult,
+        objects = GenericBenches,
+        label = 'left',
+        radius = 1.5,
+        scenarios = DrinkingScenarios,
+        x = 0.4,
+        y = -0.05,
+        z = -0.1,
+        heading = 180.0
+    },
+    {
+        isCompatible = IsPedAdult,
+        objects = GenericBenches,
+        label = 'right',
+        radius = 1.5,
+        scenarios = DrinkingScenarios,
+        x = -0.4,
+        y = -0.05,
+        z = -0.1,
         heading = 180.0
     },
     {

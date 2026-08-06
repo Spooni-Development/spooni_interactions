@@ -8,7 +8,7 @@ To install spooni_interactions:
 - Download the resource
   - On [Github](https://github.com/Spooni-Development/spooni_interactions)
 - Ensure that all requirements are installed
-  - [vorp_menu](https://github.com/VORPCORE/vorp_menu)
+  - [jo_libs](https://github.com/Jump-On-Studios/RedM-jo_libs) (2.8.0 or newer)
 - Drag and drop the resource into your resources folder
   - `spooni_interactions`
 - Add this ensure in your server.cfg
@@ -30,8 +30,9 @@ Adds simple, performance-friendly interactions for world props and locations. Wa
 Config = {}
 
 Config.DevMode = true -- true or false
-Config.Locale = 'en' -- en, de
-Config.MenuEnableCursor = true -- enable VORP menu cursor
+Config.Locale = 'en' -- en, de, fr
+Config.MenuEnableCursor = false -- show the mouse cursor while the menu is open
+Config.MenuItemsOnScreen = 8 -- menu entries visible before scrolling (max 13)
 
 Config.TeleportBackOnStop = true -- teleport player back to starting position when stopping interaction
 Config.DetectionInterval = 500 -- detection interval in ms (lower = faster, higher = better performance)
@@ -57,47 +58,33 @@ Config.BannedAreas = {
 }
 
 -- Interaction categories for menu organization
+-- 'labelKey' points to a key in shared/translation.lua, so category names follow Config.Locale.
+-- Config.CategoryOrder defines the order the categories appear in the menu.
+Config.CategoryOrder = { 'sitting', 'drinking_smoking', 'instruments', 'activities', 'resting', 'other' }
+
 Config.Categories = {
     sitting = {
-        label = 'Sitting',
-        scenarios = {
-            'GENERIC_SEAT_BENCH_SCENARIO',
-            'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR',
-            'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE',
-            'PROP_HUMAN_SEAT_CHAIR',
-            'PROP_HUMAN_SEAT_CHAIR_PORCH',
-            'PROP_HUMAN_SEAT_CHAIR_READING',
-            'PROP_CAMP_FIRE_SEAT_CHAIR',
-        }
+        labelKey = 'category_sitting',
+        scenarios = { --[[ scenario names ]] }
     },
     drinking_smoking = {
-        label = 'Drinking / Smoking',
-        scenarios = {
-            'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_DRINKING',
-            'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING',
-            'MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_SMOKING',
-            'PROP_HUMAN_SEAT_CHAIR_LANGTON', -- cigar pose
-            'PROP_HUMAN_SEAT_CHAIR_SMOKE_ROLL',
-        }
+        labelKey = 'category_drinking_smoking',
+        scenarios = { --[[ scenario names ]] }
     },
     instruments = {
-        label = 'Instruments',
-        scenarios = {
-            'PROP_HUMAN_SEAT_CHAIR_BANJO',
-            'PROP_HUMAN_SEAT_BENCH_CONCERTINA',
-            'PROP_HUMAN_SEAT_CHAIR_GUITAR',
-            'PROP_HUMAN_SEAT_BENCH_HARMONICA',
-            'PROP_HUMAN_SEAT_BENCH_JAW_HARP',
-            'PROP_HUMAN_SEAT_BENCH_MANDOLIN',
-            'PROP_HUMAN_PIANO',
-            'PROP_HUMAN_PIANO_UPPERCLASS',
-            'PROP_HUMAN_PIANO_RIVERBOAT',
-            'PROP_HUMAN_PIANO_SKETCHY',
-            'PROP_HUMAN_ABIGAIL_PIANO',
-        }
+        labelKey = 'category_instruments',
+        scenarios = { --[[ scenario names ]] }
+    },
+    activities = {
+        labelKey = 'category_activities',
+        scenarios = { --[[ scenario names ]] }
+    },
+    resting = {
+        labelKey = 'category_resting',
+        scenarios = { --[[ scenario names ]] }
     },
     other = {
-        label = 'Other',
+        labelKey = 'category_other',
         scenarios = {}
     }
 }

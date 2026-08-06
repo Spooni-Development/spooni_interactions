@@ -72,7 +72,7 @@ CreateThread(function()
             end
         elseif not DetectionManager.IsAreaBanned(playerCoords) and nearObject and CanStartInteraction then
             -- Show interaction prompt when near object
-            PromptManager.Activate(Translation[Config.Locale]['prompt_group'])
+            PromptManager.Activate(L('prompt_group'))
         else
             Wait(500)
         end
