@@ -1,18 +1,39 @@
 MenuManager = {}
-local MenuData = exports.vorp_menu:GetMenuData()
-local InMenu = false
+
+local MENU_ROOT = 'spooni_interactions:categories'
+local createdMenus = {}
+local selectionHandled = true
+
+local function RegisterMenu(id, data)
+    createdMenus[#createdMenus + 1] = id
+    return jo.menu.create(id, data)
+end
+
+local function ClearMenus()
+    for i = 1, #createdMenus do
+        jo.menu.delete(createdMenus[i])
+    end
+    createdMenus = {}
+end
+
+-- Push every built menu to the NUI layer
+local function SendMenus()
+    for i = 1, #createdMenus do
+        jo.menu.send(createdMenus[i])
+    end
+end
 
 -- Check if menu is currently open
 function MenuManager.IsInMenu()
-    return InMenu
+    return jo.menu.isOpen()
 end
 
 -- Close menu
 function MenuManager.Close()
-    if InMenu then
-        MenuData.CloseAll()
-        InMenu = false
+    if jo.menu.isOpen() then
+        jo.menu.show(false)
     end
+    ClearMenus()
 end
 
 -- Check if interaction is compatible with ped
@@ -23,7 +44,7 @@ end
 -- Get category key for scenario/animation name
 local function GetCategoryForScenario(scenarioName)
     if not scenarioName then return 'other' end
-    
+
     for categoryKey, categoryData in pairs(Config.Categories) do
         if categoryKey ~= 'other' then
             for _, scenario in ipairs(categoryData.scenarios) do
@@ -39,8 +60,13 @@ end
 -- Get category label from config
 local function GetCategoryLabel(categoryKey)
     local category = Config.Categories[categoryKey]
-    if category and category.label then
-        return category.label
+    if category then
+        if category.labelKey then
+            return L(category.labelKey)
+        end
+        if category.label then
+            return category.label
+        end
     end
     return categoryKey
 end
@@ -51,7 +77,7 @@ local function GetAvailableProps()
     local playerCoords = GetEntityCoords(ped)
     local props = {}
     local propMap = {}
-    
+
     -- Get nearby objects using itemset
     local itemset = CreateItemset(true)
     local maxRadius = 0.0
@@ -68,7 +94,7 @@ local function GetAvailableProps()
     if IsItemsetValid(itemset) then
         DestroyItemset(itemset)
     end
-    
+
     -- Check if entity model matches interaction models
     local function HasCompatibleModel(entity, models)
         if not models then return nil end
@@ -80,7 +106,7 @@ local function GetAvailableProps()
         end
         return nil
     end
-    
+
     -- Process interactions and group by entity
     for _, interaction in ipairs(Config.Interactions) do
         if IsCompatible(interaction, ped) then
@@ -103,7 +129,7 @@ local function GetAvailableProps()
                                         coords = objectCoords
                                     }
                                 end
-                                
+
                                 table.insert(propMap[object].interactions, {
                                     interaction = interaction,
                                     distance = distance
@@ -120,7 +146,7 @@ local function GetAvailableProps()
                     if not propMap[coordKey] then
                         propMap[coordKey] = {
                             entity = nil,
-                            modelName = interaction.labelText2 or 'Location',
+                            modelName = interaction.labelText2 or L('menu_location'),
                             interactions = {},
                             distance = #(playerCoords - targetCoords),
                             coords = targetCoords
@@ -134,16 +160,16 @@ local function GetAvailableProps()
             end
         end
     end
-    
+
     -- Convert to array and sort by distance
     for _, propData in pairs(propMap) do
         table.insert(props, propData)
     end
-    
+
     table.sort(props, function(a, b)
         return a.distance < b.distance
     end)
-    
+
     return props
 end
 
@@ -151,11 +177,11 @@ end
 local function GetInteractionsForProp(propData)
     local ped = PlayerPedId()
     local interactions = {}
-    
+
     for _, interactionData in ipairs(propData.interactions) do
         local interaction = interactionData.interaction
         local targetCoords = propData.coords
-        
+
         -- Process scenarios
         if interaction.scenarios then
             for _, scenario in ipairs(interaction.scenarios) do
@@ -179,7 +205,7 @@ local function GetInteractionsForProp(propData)
                 end
             end
         end
-        
+
         -- Process animations
         if interaction.animations then
             for _, animation in ipairs(interaction.animations) do
@@ -204,14 +230,14 @@ local function GetInteractionsForProp(propData)
             end
         end
     end
-    
+
     return interactions
 end
 
 -- Group interactions by category
 local function GroupInteractionsByCategory(interactions)
     local categories = {}
-    
+
     for _, interaction in ipairs(interactions) do
         local categoryKey = interaction.category or 'other'
         if not categories[categoryKey] then
@@ -219,357 +245,201 @@ local function GroupInteractionsByCategory(interactions)
         end
         table.insert(categories[categoryKey], interaction)
     end
-    
+
     return categories
-end
-
--- Group interactions by position
-local function GroupInteractionsByPosition(interactions)
-    local positions = {}
-    
-    for _, interaction in ipairs(interactions) do
-        local positionKey = interaction.label or 'default'
-        if not positions[positionKey] then
-            positions[positionKey] = {
-                label = positionKey,
-                interactions = {}
-            }
-        end
-        table.insert(positions[positionKey].interactions, interaction)
-    end
-    
-    return positions
-end
-
--- Open position selection menu (when multiple positions available)
-local function OpenPositionSelectionMenu(positions, onSelectCallback, onBackCallback)
-    InMenu = true
-    MenuData.CloseAll()
-    
-    local elements = {}
-    for positionKey, positionData in pairs(positions) do
-        local label = Translation[Config.Locale]["menu_position_" .. positionKey] or 
-                     (positionKey == 'left' and Translation[Config.Locale]["menu_position_left"] or
-                      positionKey == 'right' and Translation[Config.Locale]["menu_position_right"] or
-                      positionKey == 'middle' and Translation[Config.Locale]["menu_position_middle"] or
-                      positionKey == 'up' and Translation[Config.Locale]["menu_position_up"] or
-                      positionKey)
-        table.insert(elements, {
-            label = label,
-            value = positionKey,
-            desc = Translation[Config.Locale]["menu_select_position_subtitle"] or "Select this position",
-            position = positionData
-        })
-    end
-    
-    table.sort(elements, function(a, b)
-        return a.label < b.label
-    end)
-    
-    MenuData.Open("default", GetCurrentResourceName(), "spooni_interactions_position",
-        {
-            title = Translation[Config.Locale]["menu_select_position"] or "Select Position",
-            subtext = Translation[Config.Locale]["menu_select_position_subtitle"] or "Choose a position...",
-            align = "top-left",
-            elements = elements,
-            maxVisibleItems = 6,
-            hideRadar = false,
-            enableCursor = Config.MenuEnableCursor == nil and true or Config.MenuEnableCursor
-        },
-        function(data, menu)
-            if data.current.position then
-                menu.close()
-                InMenu = false
-                onSelectCallback(data.current.position)
-            end
-        end,
-        function(data, menu)
-            menu.close()
-            InMenu = false
-            if onBackCallback then
-                onBackCallback()
-            else
-                onSelectCallback(nil)
-            end
-        end
-    )
-end
-
--- Open category selection menu
-local function OpenCategoryMenu(categories, onSelectCallback, onBackCallback)
-    InMenu = true
-    MenuData.CloseAll()
-    
-    local elements = {}
-    local categoryOrder = {'sitting', 'drinking_smoking', 'instruments', 'other'}
-    
-    for _, categoryKey in ipairs(categoryOrder) do
-        if categories[categoryKey] and #categories[categoryKey] > 0 then
-            local label = GetCategoryLabel(categoryKey)
-            local count = #categories[categoryKey]
-            table.insert(elements, {
-                label = label,
-                value = categoryKey,
-                desc = string.format("%s %d %s", label, count, count == 1 and "interaction" or "interactions"),
-                categoryKey = categoryKey,
-                category = categories[categoryKey]
-            })
-        end
-    end
-    
-    MenuData.Open("default", GetCurrentResourceName(), "spooni_interactions_category",
-        {
-            title = Translation[Config.Locale]["menu_title"] or "Interactions",
-            subtext = Translation[Config.Locale]["menu_select_category_subtitle"] or "Select a category...",
-            align = "top-left",
-            elements = elements,
-            maxVisibleItems = 6,
-            hideRadar = false,
-            enableCursor = Config.MenuEnableCursor == nil and true or Config.MenuEnableCursor
-        },
-        function(data, menu)
-            if data.current.category and data.current.categoryKey then
-                menu.close()
-                InMenu = false
-                onSelectCallback(data.current.categoryKey, data.current.category)
-            end
-        end,
-        function(data, menu)
-            menu.close()
-            InMenu = false
-            if onBackCallback then
-                onBackCallback()
-            else
-                onSelectCallback(nil, nil)
-            end
-        end
-    )
 end
 
 -- Group interactions by type (scenario/animation, ignoring position)
 local function GroupInteractionsByType(interactions)
     local groups = {}
-    
+    local order = {}
+
     for _, interaction in ipairs(interactions) do
         local typeKey = interaction.scenario or (interaction.animation and interaction.animation.name) or "unknown"
-        
+
         if not groups[typeKey] then
             groups[typeKey] = {
+                key = typeKey,
                 interactions = {},
-                baseLabel = interaction.labelText or interaction.labelText2 or "Unknown"
+                baseLabel = interaction.labelText or interaction.labelText2 or L('menu_unknown')
             }
+            order[#order + 1] = groups[typeKey]
         end
         table.insert(groups[typeKey].interactions, interaction)
     end
-    
-    return groups
+
+    table.sort(order, function(a, b)
+        return a.baseLabel < b.baseLabel
+    end)
+
+    return order
 end
 
--- Open interactions menu for a category
-local function OpenInteractionsMenu(categoryInteractions, categoryLabel, onSelectCallback, onBackCallback)
-    InMenu = true
-    MenuData.CloseAll()
-    
-    -- Group interactions by type
-    local interactionGroups = GroupInteractionsByType(categoryInteractions)
-    
-    local elements = {}
-    for typeKey, groupData in pairs(interactionGroups) do
-        local baseLabel = groupData.baseLabel
-        
-        -- Check if multiple positions available
-        local hasMultiplePositions = false
-        local positions = {}
-        for _, interaction in ipairs(groupData.interactions) do
-            if interaction.label and interaction.label ~= 'default' then
-                hasMultiplePositions = true
-                if not positions[interaction.label] then
-                    positions[interaction.label] = {
-                        label = interaction.label,
-                        interactions = {}
-                    }
-                end
-                table.insert(positions[interaction.label].interactions, interaction)
+-- Split a group into its selectable positions
+local function GetPositionsForGroup(groupData)
+    local positions = {}
+    local order = {}
+
+    for _, interaction in ipairs(groupData.interactions) do
+        local positionKey = interaction.label
+        if positionKey and positionKey ~= 'default' then
+            if not positions[positionKey] then
+                positions[positionKey] = { key = positionKey, interactions = {} }
+                order[#order + 1] = positions[positionKey]
             end
-        end
-        
-        if hasMultiplePositions and #groupData.interactions > 1 then
-            -- Multiple positions: show base label
-            table.insert(elements, {
-                label = baseLabel,
-                value = typeKey,
-                desc = "Multiple positions available",
-                hasPositions = true,
-                positions = positions
-            })
-        else
-            -- Single interaction: show directly
-            local interaction = groupData.interactions[1]
-            local desc = "Start this interaction"
-            if interaction.scenario then
-                desc = string.format("Start %s scenario", baseLabel)
-            elseif interaction.animation then
-                desc = string.format("Start %s animation", baseLabel)
-            end
-            table.insert(elements, {
-                label = baseLabel,
-                value = typeKey,
-                desc = desc,
-                interaction = interaction,
-                hasPositions = false
-            })
+            table.insert(positions[positionKey].interactions, interaction)
         end
     end
-    
-    table.sort(elements, function(a, b)
-        return a.label < b.label
+
+    table.sort(order, function(a, b)
+        return L('menu_position_' .. a.key) < L('menu_position_' .. b.key)
     end)
-    
-    MenuData.Open("default", GetCurrentResourceName(), "spooni_interactions_list",
-        {
-            title = categoryLabel,
-            subtext = Translation[Config.Locale]["menu_subtitle"] or "Select an interaction...",
-            align = "top-left",
-            elements = elements,
-            maxVisibleItems = 6,
-            hideRadar = false,
-            enableCursor = Config.MenuEnableCursor == nil and true or Config.MenuEnableCursor
-        },
-        function(data, menu)
-            if data.current.hasPositions then
-                -- Multiple positions: show position menu
-                menu.close()
-                InMenu = false
-                OpenPositionSelectionMenu(data.current.positions, function(selectedPosition)
-                    if selectedPosition and selectedPosition.interactions and #selectedPosition.interactions > 0 then
-                        onSelectCallback(selectedPosition.interactions[1])
-                    end
-                end, function()
-                    OpenInteractionsMenu(categoryInteractions, categoryLabel, onSelectCallback, onBackCallback)
-                end)
-            elseif data.current.interaction then
-                -- Single interaction: use directly
-                menu.close()
-                InMenu = false
-                onSelectCallback(data.current.interaction)
-            end
-        end,
-        function(data, menu)
-            menu.close()
-            InMenu = false
-            if onBackCallback then
-                onBackCallback()
-            else
-                onSelectCallback(nil)
-            end
-        end
-    )
+
+    return order
 end
 
 -- Main entry point: Open categorized menu system
 function MenuManager.Open(availableInteractions, onSelectCallback)
-    -- Legacy compatibility: use provided interactions
-    if availableInteractions and #availableInteractions > 0 then
-        local categories = GroupInteractionsByCategory(availableInteractions)
-        
-        if GetTableLength(categories) == 1 then
-            local categoryKey, categoryInteractions = next(categories)
-            OpenInteractionsMenu(categoryInteractions, GetCategoryLabel(categoryKey), onSelectCallback)
-        else
-            local function ShowCategoryMenu()
-                OpenCategoryMenu(categories, function(categoryKey, selectedCategory)
-                    if categoryKey and selectedCategory then
-                        OpenInteractionsMenu(selectedCategory, GetCategoryLabel(categoryKey), onSelectCallback, ShowCategoryMenu)
-                    end
-                end)
-            end
-            ShowCategoryMenu()
+    if not availableInteractions or #availableInteractions == 0 then
+        return
+    end
+
+    ClearMenus()
+    selectionHandled = false
+
+    local function Select(interaction)
+        if selectionHandled then return end
+        selectionHandled = true
+        jo.menu.show(false)
+        onSelectCallback(interaction)
+    end
+
+    local function Cancel()
+        if selectionHandled then return end
+        selectionHandled = true
+        jo.menu.show(false)
+        onSelectCallback(nil)
+    end
+
+    local categories = GroupInteractionsByCategory(availableInteractions)
+    local categoryOrder = Config.CategoryOrder or { 'sitting', 'drinking_smoking', 'instruments', 'other' }
+
+    local activeCategories = {}
+    for _, categoryKey in ipairs(categoryOrder) do
+        if categories[categoryKey] and #categories[categoryKey] > 0 then
+            activeCategories[#activeCategories + 1] = categoryKey
         end
+    end
+
+    if #activeCategories == 0 then
         return
     end
-    
-    -- New system: Get available props
-    local props = GetAvailableProps()
-    
-    if #props == 0 then
-        return
-    end
-    
-    -- Use closest prop
-    local prop = props[1]
-    local interactions = GetInteractionsForProp(prop)
-    
-    -- Check if position selection needed
-    local positions = GroupInteractionsByPosition(interactions)
-    local positionKeys = {}
-    for k, v in pairs(positions) do
-        table.insert(positionKeys, k)
-    end
-    
-    if #positionKeys > 1 then
-        -- Multiple positions: show position menu
-        local function ShowPositionMenu()
-            OpenPositionSelectionMenu(positions, function(selectedPosition)
-                if selectedPosition then
-                    local categories = GroupInteractionsByCategory(selectedPosition.interactions)
-                    
-                    if GetTableLength(categories) == 1 then
-                        local categoryKey, categoryInteractions = next(categories)
-                        OpenInteractionsMenu(categoryInteractions, GetCategoryLabel(categoryKey), onSelectCallback, ShowPositionMenu)
-                    else
-                        local function ShowCategoryMenuFromPosition()
-                            OpenCategoryMenu(categories, function(categoryKey, selectedCategory)
-                                if categoryKey and selectedCategory then
-                                    OpenInteractionsMenu(selectedCategory, GetCategoryLabel(categoryKey), onSelectCallback, ShowCategoryMenuFromPosition)
-                                end
-                            end, ShowPositionMenu)
+
+    local isSingleCategory = #activeCategories == 1
+
+    -- Build one list menu per category
+    for _, categoryKey in ipairs(activeCategories) do
+        local categoryLabel = GetCategoryLabel(categoryKey)
+        local categoryMenuId = 'spooni_interactions:cat:' .. categoryKey
+        local categoryMenu = RegisterMenu(categoryMenuId, {
+            title = categoryLabel,
+            subtitle = L('menu_subtitle'),
+            numberOnScreen = Config.MenuItemsOnScreen or 8,
+            displayBackButton = true,
+            onBack = isSingleCategory and Cancel or nil
+        })
+
+        local groups = GroupInteractionsByType(categories[categoryKey])
+
+        for groupIndex, groupData in ipairs(groups) do
+            local positions = GetPositionsForGroup(groupData)
+
+            if #positions > 1 then
+                local positionMenuId = string.format('spooni_interactions:pos:%s:%d', categoryKey, groupIndex)
+                local positionMenu = RegisterMenu(positionMenuId, {
+                    title = groupData.baseLabel,
+                    subtitle = L('menu_select_position_subtitle'),
+                    numberOnScreen = Config.MenuItemsOnScreen or 8,
+                    displayBackButton = true
+                })
+
+                for _, positionData in ipairs(positions) do
+                    local target = positionData.interactions[1]
+                    positionMenu:addItem({
+                        title = L('menu_position_' .. positionData.key),
+                        description = L('menu_start_interaction'),
+                        onClick = function()
+                            Select(target)
                         end
-                        ShowCategoryMenuFromPosition()
-                    end
+                    })
                 end
-            end)
-        end
-        ShowPositionMenu()
-    else
-        -- No position selection: group by category
-        local categories = GroupInteractionsByCategory(interactions)
-        
-        if GetTableLength(categories) == 1 then
-            local categoryKey, categoryInteractions = next(categories)
-            OpenInteractionsMenu(categoryInteractions, GetCategoryLabel(categoryKey), onSelectCallback)
-        else
-            local function ShowCategoryMenu()
-                OpenCategoryMenu(categories, function(categoryKey, selectedCategory)
-                    if categoryKey and selectedCategory then
-                        OpenInteractionsMenu(selectedCategory, GetCategoryLabel(categoryKey), onSelectCallback, ShowCategoryMenu)
+
+                categoryMenu:addItem({
+                    title = groupData.baseLabel,
+                    description = L('menu_multiple_positions'),
+                    child = positionMenuId
+                })
+            else
+                local target = groupData.interactions[1]
+                local description = L('menu_start_interaction')
+                if target.scenario then
+                    description = L('menu_start_scenario', groupData.baseLabel)
+                elseif target.animation then
+                    description = L('menu_start_animation', groupData.baseLabel)
+                end
+
+                categoryMenu:addItem({
+                    title = groupData.baseLabel,
+                    description = description,
+                    onClick = function()
+                        Select(target)
                     end
-                end)
+                })
             end
-            ShowCategoryMenu()
         end
     end
-end
 
--- Get table length
-function GetTableLength(t)
-    local count = 0
-    for _ in pairs(t) do
-        count = count + 1
+    local rootMenuId = 'spooni_interactions:cat:' .. activeCategories[1]
+
+    -- Category picker is only needed when more than one category is available
+    if not isSingleCategory then
+        rootMenuId = MENU_ROOT
+        local rootMenu = RegisterMenu(MENU_ROOT, {
+            title = L('menu_title'),
+            subtitle = L('menu_select_category_subtitle'),
+            numberOnScreen = Config.MenuItemsOnScreen or 8,
+            displayBackButton = true,
+            onBack = Cancel
+        })
+
+        for _, categoryKey in ipairs(activeCategories) do
+            local categoryLabel = GetCategoryLabel(categoryKey)
+            local count = #categories[categoryKey]
+            rootMenu:addItem({
+                title = categoryLabel,
+                description = string.format('%s %d %s', categoryLabel, count,
+                    count == 1 and L('menu_interaction_singular') or L('menu_interaction_plural')),
+                child = 'spooni_interactions:cat:' .. categoryKey
+            })
+        end
     end
-    return count
+
+    SendMenus()
+    jo.menu.setCurrentMenu(rootMenuId, false)
+    jo.menu.show(true, true, false, true, Config.MenuEnableCursor ~= true)
 end
 
--- Legacy compatibility: Get available interactions (flat list)
+-- Get available interactions (flat list)
 function MenuManager.GetAvailableInteractions()
     local props = GetAvailableProps()
     local allInteractions = {}
-    
+
     for _, prop in ipairs(props) do
         local interactions = GetInteractionsForProp(prop)
         for _, interaction in ipairs(interactions) do
             table.insert(allInteractions, interaction)
         end
     end
-    
+
     return allInteractions
 end

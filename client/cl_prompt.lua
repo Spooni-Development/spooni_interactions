@@ -6,7 +6,7 @@ local StandUp = nil
 -- Initialize prompt system
 function PromptManager.Initialize()
     -- Main interaction prompt
-    local str = Translation[Config.Locale]['prompt_interact']
+    local str = L('prompt_interact')
     Interact = PromptRegisterBegin()
     UiPromptSetControlAction(Interact, Config.Keys.interact)
     str = CreateVarString(10, 'LITERAL_STRING', str)
@@ -19,7 +19,7 @@ function PromptManager.Initialize()
     UiPromptRegisterEnd(Interact)
     
     -- Stand up prompt (hidden by default)
-    local standUpStr = Translation[Config.Locale]['prompt_stand_up']
+    local standUpStr = L('prompt_stand_up')
     StandUp = PromptRegisterBegin()
     UiPromptSetControlAction(StandUp, Config.Keys.standUp)
     standUpStr = CreateVarString(10, 'LITERAL_STRING', standUpStr)
@@ -37,7 +37,7 @@ function PromptManager.Activate(title)
     UiPromptSetVisible(Interact, 1)
     UiPromptSetVisible(StandUp, 0)
     
-    local label = CreateVarString(10, 'LITERAL_STRING', title or Translation[Config.Locale]['prompt_group'])
+    local label = CreateVarString(10, 'LITERAL_STRING', title or L('prompt_group'))
     UiPromptSetActiveGroupThisFrame(promptGroup, label)
 end
 
@@ -46,7 +46,7 @@ function PromptManager.ActivateStandUp()
     UiPromptSetVisible(Interact, 1)
     UiPromptSetVisible(StandUp, 1)
     
-    local label = CreateVarString(10, 'LITERAL_STRING', Translation[Config.Locale]['prompt_group'])
+    local label = CreateVarString(10, 'LITERAL_STRING', L('prompt_group'))
     UiPromptSetActiveGroupThisFrame(promptGroup, label)
 end
 

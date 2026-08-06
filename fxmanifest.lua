@@ -7,12 +7,13 @@ author 'Spooni'
 description 'Interaction Script'
 version '9'
 
+ui_page 'nui://jo_libs/nui/menu/index.html'
+
 server_scripts {
 	'server/*.lua',
 }
 
 client_scripts {
-	'shared/translation.lua',
 	'client/cl_common.lua',
 	'shared/config.lua',
 	'client/cl_prompt.lua',
@@ -23,9 +24,15 @@ client_scripts {
 }
 
 shared_scripts {
-	'shared/*.lua',
+	'@jo_libs/init.lua',
+	'shared/translation.lua',
+	'shared/config.lua',
+}
+
+jo_libs {
+	'menu',
 }
 
 dependencies {
-    'vorp_menu',
+	'jo_libs',
 }
