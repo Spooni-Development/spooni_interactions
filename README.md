@@ -30,7 +30,7 @@ Adds simple, performance-friendly interactions for world props and locations. Wa
 Config = {}
 
 Config.DevMode = true -- true or false
-Config.Locale = 'en' -- en, de, fr
+Config.Locale = 'fr' -- en, de, fr
 Config.MenuEnableCursor = false -- show the mouse cursor while the menu is open
 Config.MenuItemsOnScreen = 8 -- menu entries visible before scrolling (max 13)
 

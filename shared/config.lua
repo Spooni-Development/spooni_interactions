@@ -5,10 +5,12 @@ Config.Locale = 'en' -- en, de, fr
 Config.MenuEnableCursor = false -- show the mouse cursor while the menu is open
 Config.MenuItemsOnScreen = 8 -- menu entries visible before scrolling (max 13)
 
-Config.TeleportBackOnStop = true -- teleport player back to starting position when stopping interaction
-Config.DetectionInterval = 500 -- detection interval in ms (lower = faster, higher = better performance)
 
-Config.Keys = { interact = `INPUT_PC_FREE_LOOK`, standUp = `INPUT_QUIT` } -- ALT, Back Space
+Config.TeleportBackOnStop = true -- teleport player back to starting position when stopping interaction
+Config.DetectionInterval = 500 -- detection interval in ms while no interactable is nearby
+Config.DetectionIntervalNear = 250 -- detection interval in ms while standing at an interactable
+
+Config.Keys = { interact = `INPUT_INTERACT_OPTION1`, standUp = `INPUT_QUIT` } -- G, Back Space
 
 -- Optional interaction effects
 Config.Effects = {
@@ -45,6 +47,22 @@ Config.Categories = {
             'PROP_HUMAN_CAMP_FIRE_SEAT_BOX',
             'PROP_HUMAN_SEAT_CHAIR_FAN',
             'PROP_HUMAN_SEAT_CHAIR_GROOMING_GROSS',
+            'PROP_HUMAN_SEAT_BENCH',
+            'PROP_PLAYER_SEAT_CHAIR_GENERIC',
+            'PROP_HUMAN_SEAT_BENCH_PORCH',
+            'PROP_HUMAN_SEAT_CHAIR_SAD',
+            'MP_LOBBY_SEATED_A',
+            'MP_LOBBY_SEATED_B',
+            'MP_LOBBY_SEATED_C',
+            'MP_LOBBY_SEATED_D',
+            'MP_LOBBY_SEATED_E',
+            'MP_LOBBY_SEATED_F',
+            'PROP_CAMP_FIRE_SEATED',
+            'PROP_CAMP_FIRE_SEAT_BENCH',
+            'PROP_HUMAN_SEAT_NO_BACK_COLLECTION',
+            'PROP_PLAYER_BARBER_SEAT',
+            'PROP_PLAYER_SEAT_CHAIR_DYNAMIC',
+            'PROP_PLAYER_DYNAMIC_SEAT_CHAIR_TABLE',
         }
     },
     drinking_smoking = {
@@ -59,6 +77,8 @@ Config.Categories = {
             'PROP_HUMAN_SEAT_CHAIR_LANGTON',
             'PROP_HUMAN_SEAT_CHAIR_CIGAR',
             'PROP_HUMAN_SEAT_CHAIR_SMOKE_ROLL',
+            'PROP_HUMAN_SEAT_CHAIR_SMOKING',
+            'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING_MOONSHINE',
         }
     },
     instruments = {
@@ -77,6 +97,9 @@ Config.Categories = {
             'PROP_HUMAN_PIANO_SKETCHY',
             'PROP_HUMAN_ABIGAIL_PIANO',
             'MP_MOONSHINE_BAND_WORLD_HUMAN_PIANO',
+            'PROP_HUMAN_SEAT_CHAIR_BLUES_GUITAR',
+            'MP_MOONSHINE_BAND_PROP_HUMAN_SEAT_CHAIR_BANJO',
+            'MP_MOONSHINE_BAND_PROP_HUMAN_SEAT_CHAIR_WASHBOARD',
         }
     },
     activities = {
@@ -98,6 +121,11 @@ Config.Categories = {
             'PROP_HUMAN_SEAT_CHAIR_MORTAR_PESTLE',
             'PROP_HUMAN_SEAT_CHAIR_CLEAN_RIFLE',
             'PROP_CAMP_MICAH_SEAT_CHAIR_CLEAN_GUN',
+            'PROP_HUMAN_SEAT_CHAIR_SKETCHING',
+            'PROP_HUMAN_SEAT_CHAIR_SEWING',
+            'PROP_HUMAN_SEAT_CHAIR_TABLE_FAN_WHORE',
+            'PROP_HUMAN_SEAT_CHAIR_WHITTLE',
+            'PROP_HUMAN_SEAT_CHAIR_CARVE_LURE',
         }
     },
     resting = {
@@ -125,7 +153,7 @@ Config.Categories = {
 Config.Interactions = {
     -- Pianos
     {
-        isCompatible = IsPedHumanMale,
+        isCompatible = IsPedHuman,
         objects = {'p_piano03x'},
         radius = 2.0,
         scenarios = PianoScenarios,
@@ -135,7 +163,7 @@ Config.Interactions = {
         heading = 0.0
     },
     {
-        isCompatible = IsPedHumanMale,
+        isCompatible = IsPedHuman,
         objects = {'p_piano02x'},
         radius = 2.0,
         scenarios = PianoScenarios,
@@ -145,7 +173,7 @@ Config.Interactions = {
         heading = 0.0
     },
     {
-        isCompatible = IsPedHumanMale,
+        isCompatible = IsPedHuman,
         objects = {'p_nbxpiano01x'},
         radius = 2.0,
         scenarios = PianoScenarios,
@@ -155,7 +183,7 @@ Config.Interactions = {
         heading = 0.0
     },
     {
-        isCompatible = IsPedHumanMale,
+        isCompatible = IsPedHuman,
         objects = {'p_nbmpiano01x'},
         radius = 2.0,
         scenarios = PianoScenarios,
@@ -290,7 +318,7 @@ Config.Interactions = {
         heading = 180.0
     },
     {
-        isCompatible = IsPedHumanMale,
+        isCompatible = IsPedHuman,
         objects = {'p_barstool01x'},
         radius = 1.5,
         scenarios = GenericChairAndBenchScenarios,
@@ -687,7 +715,7 @@ Config.Interactions = {
     },
     -- St. Denis Church Organ
     {
-        isCompatible = IsPedHumanMale,
+        isCompatible = IsPedHuman,
         objects = {'pipeorgan'},
         radius = 2.0,
         scenarios = PianoScenarios,

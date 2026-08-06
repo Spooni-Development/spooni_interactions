@@ -311,11 +311,11 @@ GenericChairAndBenchScenarios = {
     },
     {
         name = 'MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS',
-        isCompatible = IsPedHumanMale,
         label = L('mp_lobby_prop_human_seat_chair_knife_badass')
     },
     {
         name = 'WORLD_CAMP_JAVIER_KNIFE',
+        isCompatible = IsPedHumanMale,
         label = L('world_camp_javier_knife')
     },
     {
@@ -329,7 +329,6 @@ GenericChairAndBenchScenarios = {
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_READING',
-        isCompatible = IsPedHumanFemale,
         label = L('prop_human_seat_chair_reading')
     },
     {
@@ -342,6 +341,7 @@ GenericChairAndBenchScenarios = {
     },
     {
         name = 'PROP_HUMAN_SEAT_BENCH_HARMONICA',
+        isCompatible = IsPedHumanMale,
         label = L('prop_human_seat_bench_harmonica')
     },
     {
@@ -368,10 +368,12 @@ GenericChairAndBenchScenarios = {
     },
     {
         name = 'PROP_CAMP_JAVIER_SEAT_CRATE_BRUSH_HAT',
+        isCompatible = IsPedHumanMale,
         label = L('prop_camp_javier_seat_crate_brush_hat')
     },
     {
         name = 'PROP_CAMP_CHARLES_SEAT_CHAIR_ARROW_FLETCH',
+        isCompatible = IsPedHumanMale,
         label = L('prop_camp_charles_seat_chair_arrow_fletch')
     },
     {
@@ -380,6 +382,7 @@ GenericChairAndBenchScenarios = {
     },
     {
         name = 'PROP_HUMAN_SEAT_CHAIR_CLEAN_RIFLE',
+        isCompatible = IsPedHumanMale,
         label = L('prop_human_seat_chair_clean_rifle')
     },
     {
@@ -399,7 +402,123 @@ GenericChairAndBenchScenarios = {
     },
     {
         name = 'PROP_HUMAN_PASSED_OUT_TABLE',
+        isCompatible = IsPedHumanMale,
         label = L('prop_human_passed_out_table')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_A',
+        label = L('mp_lobby_seated_a')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_B',
+        label = L('mp_lobby_seated_b')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_C',
+        label = L('mp_lobby_seated_c')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_D',
+        label = L('mp_lobby_seated_d')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_E',
+        label = L('mp_lobby_seated_e')
+    },
+    {
+        name = 'MP_LOBBY_SEATED_F',
+        label = L('mp_lobby_seated_f')
+    },
+    {
+        name = 'PROP_CAMP_FIRE_SEATED',
+        label = L('prop_camp_fire_seated')
+    },
+    {
+        name = 'PROP_CAMP_FIRE_SEAT_BENCH',
+        label = L('prop_camp_fire_seat_bench')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_NO_BACK_COLLECTION',
+        label = L('prop_human_seat_no_back_collection')
+    },
+    {
+        name = 'PROP_PLAYER_BARBER_SEAT',
+        label = L('prop_player_barber_seat')
+    },
+    {
+        name = 'MP_MOONSHINE_BAND_PROP_HUMAN_SEAT_CHAIR_BANJO',
+        isCompatible = IsPedHumanMale,
+        label = L('mp_moonshine_band_banjo')
+    },
+    {
+        name = 'MP_MOONSHINE_BAND_PROP_HUMAN_SEAT_CHAIR_WASHBOARD',
+        isCompatible = IsPedHumanMale,
+        label = L('mp_moonshine_band_washboard')
+    },
+    {
+        name = 'PROP_PLAYER_SEAT_CHAIR_DYNAMIC',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_player_seat_chair_dynamic')
+    },
+    {
+        name = 'PROP_PLAYER_DYNAMIC_SEAT_CHAIR_TABLE',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_player_dynamic_seat_chair_table')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_SMOKING',
+        label = L('prop_human_seat_chair_smoking')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_SKETCHING',
+        label = L('prop_human_seat_chair_sketching')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING_MOONSHINE',
+        label = L('prop_human_seat_chair_table_drinking_moonshine')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_BENCH',
+        label = L('prop_human_seat_bench')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_SAD',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_human_seat_chair_sad')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_SEWING',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_human_seat_chair_sewing')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_TABLE_FAN_WHORE',
+        isCompatible = IsPedHumanFemale,
+        label = L('prop_human_seat_chair_table_fan')
+    },
+    {
+        name = 'PROP_PLAYER_SEAT_CHAIR_GENERIC',
+        label = L('prop_player_seat_chair_generic')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_WHITTLE',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_chair_whittle')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_BLUES_GUITAR',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_chair_blues_guitar')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_CHAIR_CARVE_LURE',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_chair_carve_lure')
+    },
+    {
+        name = 'PROP_HUMAN_SEAT_BENCH_PORCH',
+        isCompatible = IsPedHumanMale,
+        label = L('prop_human_seat_bench_porch')
     },
 }
 
